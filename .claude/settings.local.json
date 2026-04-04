@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:air.dev)",
+      "WebSearch",
+      "WebFetch(domain:web.archive.org)",
+      "WebFetch(domain:www.lapa.ninja)"
+    ]
+  }
+}

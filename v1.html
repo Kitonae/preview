@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WO6 Import — WATCHOUT 7</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0e0e0e;
+      --bg-card: #1a1a1a;
+      --bg-card-hover: #222;
+      --text: #f5f5f5;
+      --text-secondary: #a3a3a3;
+      --text-muted: #636363;
+      --accent: #a78bfa;
+      --accent-hover: #8b5cf6;
+      --accent-glow: rgba(139, 92, 246, 0.12);
+      --border: #262626;
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ───────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14, 14, 14, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); font-size: 0.75em; margin-left: 4px; vertical-align: super; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .btn-nav {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-nav:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    /* ── SECTIONS ──────────────────────────────── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+    }
+    .section-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+    .section-header { margin-bottom: 4rem; }
+
+    /* ── HERO ──────────────────────────────────── */
+    .hero-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-orb {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(139,92,246,0.13) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+    }
+    .hero-pill {
+      display: inline-block;
+      background: rgba(139,92,246,0.12);
+      border: 1px solid rgba(139,92,246,0.25);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.75rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent) 0%, #c4b5fd 50%, var(--accent-hover) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+    .btn-primary, .btn-ghost {
+      padding: 0.8rem 2rem;
+      border-radius: 100px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,92,246,0.3); }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+    .btn-primary:hover::after { transform: translateX(100%); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--text-muted); transform: translateY(-2px); }
+
+    /* ── HERO VISUAL ───────────────────────────── */
+    .hero-visual {
+      margin-top: 4rem;
+      animation: fadeInUp 0.6s ease 0.45s both;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .file-icon {
+      width: 100px;
+      height: 120px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      position: relative;
+    }
+    .file-wo6 {
+      background: linear-gradient(135deg, #374151, #1f2937);
+      border: 1px solid #4b5563;
+      color: #9ca3af;
+    }
+    .file-wo7 {
+      background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(139,92,246,0.08));
+      border: 1px solid rgba(139,92,246,0.35);
+      color: var(--accent);
+    }
+    .file-icon .ext {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .arrow-flow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      font-size: 1.5rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .arrow-flow .dots { color: var(--text-muted); font-size: 1rem; letter-spacing: 4px; }
+
+    /* ── PIPELINE ──────────────────────────────── */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .phase-card {
+      background: var(--bg-card);
+      padding: 2.5rem 1.5rem;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .phase-card:hover { background: var(--bg-card-hover); }
+    .phase-num {
+      font-size: 4rem;
+      font-weight: 800;
+      color: rgba(167,139,250,0.06);
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+    }
+    .phase-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .phase-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .phase-card p {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── FEATURE GRID ─────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border-color: rgba(139,92,246,0.2);
+    }
+    .feature-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .feature-card h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    /* ── TWO-COL ──────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .two-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .two-col li {
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+    .two-col li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ── CODE BLOCK ────────────────────────────── */
+    .code-block {
+      background: #131313;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .code-header {
+      background: rgba(255,255,255,0.03);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #eab308; }
+    .dot-green { background: #22c55e; }
+    .code-header span:last-child { font-size: 0.75rem; color: var(--text-muted); margin-left: 0.75rem; }
+    .code-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+    .code-body .label { color: var(--text-muted); min-width: 180px; display: inline-block; }
+    .code-body .arrow { color: var(--accent); font-weight: 600; margin: 0 0.5rem; }
+    .code-body .val-old { color: #9ca3af; }
+    .code-body .val-new { color: #86efac; }
+
+    /* ── ARCH CARDS ────────────────────────────── */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .arch-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .arch-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+    .arch-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .arch-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ── STACK DIAGRAM ─────────────────────────── */
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .stack-row {
+      display: flex;
+      gap: 2px;
+    }
+    .stack-cell {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      border-left: 3px solid transparent;
+      transition: background 0.2s;
+    }
+    .stack-cell:hover { background: var(--bg-card-hover); }
+    .stack-cell.accent-border { border-left-color: var(--accent); }
+    .stack-label { color: var(--text-muted); font-weight: 400; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.25rem; }
+
+    /* ── REPORT MOCK ───────────────────────────── */
+    .report-mock {
+      background: #131313;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .report-chrome {
+      background: #1a1a1a;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .report-chrome .url {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-left: 0.75rem;
+      background: rgba(255,255,255,0.04);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      flex: 1;
+    }
+    .report-body {
+      padding: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.9;
+    }
+    .report-body .rpt-heading {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .report-body .rpt-meta { color: var(--text-muted); margin-bottom: 1rem; }
+    .report-body .rpt-stat { color: #86efac; }
+    .report-body .rpt-warn { color: #fbbf24; }
+    .report-body .rpt-err { color: #f87171; }
+    .report-body .rpt-line { margin-bottom: 0.15rem; }
+
+    /* ── FOOTER ────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 4rem 2rem 2.5rem;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+    }
+    footer .footer-brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    footer .footer-brand span { color: var(--accent); }
+    footer .footer-sub { margin-bottom: 1.5rem; }
+    footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; }
+    footer .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    footer .footer-links a:hover { color: var(--text); }
+
+    /* ── ANIMATIONS ────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 1024px) {
+      .pipeline-grid { grid-template-columns: repeat(3, 1fr); }
+      .arch-grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 4.5rem 1.25rem; }
+      .pipeline-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .arch-grid { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn-nav) { display: none; }
+      .hero { padding: 5rem 1.25rem 3rem; }
+      .hero-visual { flex-direction: column; }
+      .arrow-flow { transform: rotate(90deg); }
+      .stack-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">WATCHOUT<span>7</span></a>
+      <div class="nav-links">
+        <a href="#process">Process</a>
+        <a href="#features">Features</a>
+        <a href="#transforms">Transforms</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#report">Report</a>
+        <a href="#" class="btn-nav">Get WATCHOUT 7</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <div class="hero-orb"></div>
+    <div class="hero">
+      <div class="hero-pill">NEW IN WATCHOUT 7</div>
+      <h1>Bring Your Legacy<br>Shows <em>Forward</em></h1>
+      <p class="hero-sub">
+        The WO6 Importer automatically converts your WATCHOUT&nbsp;6 shows to WATCHOUT&nbsp;7&thinsp;&mdash;&thinsp;preserving timelines, cues, media, stage configuration, and coordinate precision in a single click.
+      </p>
+      <div class="hero-actions">
+        <a href="#process" class="btn-primary">See How It Works</a>
+        <a href="#features" class="btn-ghost">Explore Features</a>
+      </div>
+      <div class="hero-visual">
+        <div class="file-icon file-wo6">
+          <span class="ext">&#128230;</span>
+          .watch
+        </div>
+        <div class="arrow-flow">
+          <span class="dots">&middot;&middot;&middot;</span>
+          &#10132;
+          <span class="dots">&middot;&middot;&middot;</span>
+        </div>
+        <div class="file-icon file-wo7">
+          <span class="ext">&#9889;</span>
+          WO7
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <section id="process" class="section">
+    <div class="section-header fade-in">
+      <div class="section-label">Import Pipeline</div>
+      <h2 class="section-title">Five Phases. One Click.</h2>
+      <p class="section-subtitle">The importer handles every step automatically, from extracting your legacy .watch file to generating a comprehensive import report.</p>
+    </div>
+    <div class="pipeline-grid">
+      <div class="phase-card fade-in" style="transition-delay:0s">
+        <div class="phase-num">01</div>
+        <span class="phase-icon">&#128230;</span>
+        <h3>Extracting</h3>
+        <p>Unzips the .watch archive and reads the internal JSON_Data structure.</p>
+      </div>
+      <div class="phase-card fade-in" style="transition-delay:0.08s">
+        <div class="phase-num">02</div>
+        <span class="phase-icon">&#123;&#125;</span>
+        <h3>Parsing</h3>
+        <p>Deserializes WO6 JSON into typed Rust structs, handling both legacy and v6.5.1+ formats with full OID resolution.</p>
+      </div>
+      <div class="phase-card fade-in" style="transition-delay:0.16s">
+        <div class="phase-num">03</div>
+        <span class="phase-icon">&#8644;</span>
+        <h3>Mapping</h3>
+        <p>Transforms WO6 coordinate systems, scales, structures, and references to their WO7 equivalents.</p>
+      </div>
+      <div class="phase-card fade-in" style="transition-delay:0.24s">
+        <div class="phase-num">04</div>
+        <span class="phase-icon">&#128451;</span>
+        <h3>Creating Assets</h3>
+        <p>Registers all media files, textures, and 3D models with the WATCHOUT 7 asset server.</p>
+      </div>
+      <div class="phase-card fade-in" style="transition-delay:0.32s">
+        <div class="phase-num">05</div>
+        <span class="phase-icon">&#9989;</span>
+        <h3>Generating Report</h3>
+        <p>Produces a detailed HTML report with import statistics, warnings, and asset tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section">
+    <div class="section-header fade-in">
+      <div class="section-label">Coverage</div>
+      <h2 class="section-title">Comprehensive Coverage</h2>
+      <p class="section-subtitle">From still images to 3D models, from simple fades to complex bezier paths&thinsp;&mdash;&thinsp;the importer handles the full breadth of WATCHOUT&nbsp;6 features.</p>
+    </div>
+    <div class="feature-grid">
+
+      <div class="feature-card fade-in" style="transition-delay:0s">
+        <div class="feature-card-icon">&#127912;</div>
+        <h3>Media</h3>
+        <div class="tags">
+          <span class="tag">Still Images</span>
+          <span class="tag">Video</span>
+          <span class="tag">Audio</span>
+          <span class="tag">Text</span>
+          <span class="tag">Compositions</span>
+          <span class="tag">3D Models</span>
+          <span class="tag">Virtual Displays</span>
+          <span class="tag">Solid Media</span>
+          <span class="tag">Pre-Split Images</span>
+          <span class="tag">Image Sequences</span>
+        </div>
+      </div>
+
+      <div class="feature-card fade-in" style="transition-delay:0.08s">
+        <div class="feature-card-icon">&#9654;</div>
+        <h3>Cues</h3>
+        <div class="tags">
+          <span class="tag">MediaCue</span>
+          <span class="tag">ContMediaCue</span>
+          <span class="tag">CompCue</span>
+          <span class="tag">ModelCue</span>
+          <span class="tag">ControlCue</span>
+          <span class="tag">LevelCue &rarr; Variable</span>
+          <span class="tag">LevelCue &rarr; ArtNet</span>
+        </div>
+      </div>
+
+      <div class="feature-card fade-in" style="transition-delay:0.16s">
+        <div class="feature-card-icon">&#12336;</div>
+        <h3>Tweens</h3>
+        <div class="tags">
+          <span class="tag">Position (Bezier)</span>
+          <span class="tag">Scale</span>
+          <span class="tag">Opacity</span>
+          <span class="tag">Rotation X/Y/Z</span>
+          <span class="tag">Anchor</span>
+          <span class="tag">Crop</span>
+          <span class="tag">Volume</span>
+          <span class="tag">Wipe (Linear)</span>
+          <span class="tag">Corner Pin</span>
+          <span class="tag">Contrast/Brightness</span>
+          <span class="tag">Expressions</span>
+        </div>
+      </div>
+
+      <div class="feature-card fade-in" style="transition-delay:0.24s">
+        <div class="feature-card-icon">&#127899;</div>
+        <h3>Variables &amp; Outputs</h3>
+        <div class="tags">
+          <span class="tag">Internal Variables</span>
+          <span class="tag">MIDI Controller</span>
+          <span class="tag">DMX / ArtNet</span>
+          <span class="tag">GenericOutput &rarr; Input</span>
+          <span class="tag">DMXChannelOutput &rarr; Fixture</span>
+        </div>
+      </div>
+
+      <div class="feature-card fade-in" style="transition-delay:0.32s">
+        <div class="feature-card-icon">&#128421;</div>
+        <h3>Stage</h3>
+        <div class="tags">
+          <span class="tag">Displays</span>
+          <span class="tag">Projectors</span>
+          <span class="tag">Warp Geometry</span>
+          <span class="tag">Tiers</span>
+          <span class="tag">Network Nodes</span>
+          <span class="tag">Soft-Edge Blending</span>
+          <span class="tag">Frustum / Lens</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRANSFORMS -->
+  <section id="transforms" class="section">
+    <div class="two-col">
+      <div class="fade-in">
+        <div class="section-label">Coordinate System</div>
+        <h2 class="section-title">Precision Coordinate Mapping</h2>
+        <p class="section-subtitle" style="margin-bottom:2rem;">WATCHOUT 6 and 7 use different coordinate conventions. The importer handles every transformation automatically.</p>
+        <ul>
+          <li>Y/Z axis negation for 3D space compatibility</li>
+          <li>Anchor point flipping relative to image height</li>
+          <li>Scale and opacity normalization (0&ndash;1 &rarr; 0&ndash;100)</li>
+          <li>Composition reference frame adjustment</li>
+          <li>Projector eye, origin, and frustum conversion</li>
+          <li>Layer index and MIDI channel re-indexing</li>
+          <li>Bezier control point coordinate transforms</li>
+        </ul>
+      </div>
+      <div class="fade-in" style="transition-delay:0.15s">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span>coordinate_transforms.rs</span>
+          </div>
+          <div class="code-body">
+            <div><span class="label">position.y: 150</span><span class="arrow">&rarr;</span><span class="val-new">-150</span></div>
+            <div><span class="label">position.z: 80</span><span class="arrow">&rarr;</span><span class="val-new">-80</span></div>
+            <div><span class="label">scale: 0.75</span><span class="arrow">&rarr;</span><span class="val-new">75</span></div>
+            <div><span class="label">opacity: 0.5</span><span class="arrow">&rarr;</span><span class="val-new">50</span></div>
+            <div><span class="label">anchor.y: 20</span><span class="arrow">&rarr;</span><span class="val-new">height - 20</span></div>
+            <div><span class="label">layer_index: 3</span><span class="arrow">&rarr;</span><span class="val-new">2</span></div>
+            <div><span class="label">midi_channel: 1</span><span class="arrow">&rarr;</span><span class="val-new">0</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="architecture" class="section">
+    <div class="section-header fade-in">
+      <div class="section-label">Technology</div>
+      <h2 class="section-title">Built for Reliability</h2>
+      <p class="section-subtitle">Written in Rust for memory safety and performance, with a Vue 3 UI for real-time progress tracking.</p>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card fade-in" style="transition-delay:0s">
+        <h3>&#129408;&ensp;Rust Core</h3>
+        <p>The <code>wo6-importer</code> crate provides type-safe parsing, OID reference resolution, and comprehensive error handling across two JSON dialects.</p>
+      </div>
+      <div class="arch-card fade-in" style="transition-delay:0.08s">
+        <h3>&#128268;&ensp;Tauri Integration</h3>
+        <p>Seamless IPC between the Rust backend and Vue 3 frontend with real-time <code>Wo6ImportProgress</code> and <code>Wo6ImportComplete</code> events.</p>
+      </div>
+      <div class="arch-card fade-in" style="transition-delay:0.16s">
+        <h3>&#128640;&ensp;Asset Pipeline</h3>
+        <p>Direct integration with the WATCHOUT 7 asset server via StatelessClient for automatic media registration and folder hierarchy preservation.</p>
+      </div>
+    </div>
+
+    <div class="stack fade-in" style="transition-delay:0.25s">
+      <div class="stack-row">
+        <div class="stack-cell accent-border">
+          <span class="stack-label">Frontend</span>
+          ImportWo6Dialog.vue &mdash; Vue 3 + Quasar
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-cell accent-border">
+          <span class="stack-label">IPC Layer</span>
+          Tauri 2.0 Action Handlers
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-cell accent-border" style="flex:2">
+          <span class="stack-label">Core</span>
+          wo6-importer Crate
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-cell"><span class="stack-label">Phase 1-2</span>Parsing</div>
+        <div class="stack-cell"><span class="stack-label">Phase 3</span>Mapping</div>
+        <div class="stack-cell"><span class="stack-label">Phase 4</span>Assets</div>
+        <div class="stack-cell"><span class="stack-label">Phase 5</span>Report</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section id="report" class="section">
+    <div class="two-col">
+      <div class="fade-in">
+        <div class="section-label">Observability</div>
+        <h2 class="section-title">Know Exactly What Happened</h2>
+        <p class="section-subtitle" style="margin-bottom:2rem;">Every import generates a detailed HTML report with statistics, warnings, and actionable information.</p>
+        <ul>
+          <li>Show name, WO6 version, and import timestamp</li>
+          <li>Counts for timelines, cues, media, displays, and variables</li>
+          <li>Clear warnings for unsupported cue types with timeline and time</li>
+          <li>Missing asset detection with file paths</li>
+          <li>Unresolved control cue target alerts</li>
+          <li>Text media converted to image notifications</li>
+        </ul>
+      </div>
+      <div class="fade-in" style="transition-delay:0.15s">
+        <div class="report-mock">
+          <div class="report-chrome">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="url">import-report.html</span>
+          </div>
+          <div class="report-body">
+            <div class="rpt-heading">Import Report &mdash; ConcertShow.watch</div>
+            <div class="rpt-meta">Version 6.5.1 &ensp;|&ensp; Imported 2024-11-20 14:32</div>
+            <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 8 timelines imported</div>
+            <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 412 cues imported</div>
+            <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 87 media assets registered</div>
+            <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 6 displays configured</div>
+            <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 14 variables mapped</div>
+            <br>
+            <div class="rpt-line"><span class="rpt-warn">&#9888;</span> StringCue at 00:15.0 on "Main" &mdash; not supported</div>
+            <div class="rpt-line"><span class="rpt-warn">&#9888;</span> DMXCue at 01:30.0 on "Effects" &mdash; not supported</div>
+            <div class="rpt-line"><span class="rpt-err">&#10007;</span> Missing asset: media/intro_loop.mov</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">WATCHOUT<span>&thinsp;7</span></div>
+    <div class="footer-sub">by Dataton</div>
+    <div class="footer-links">
+      <a href="#">Documentation</a>
+      <a href="#">Release Notes</a>
+      <a href="#">Support</a>
+    </div>
+    <div>&copy; 2024 Dataton AB. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Nav scroll shadow
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+  </script>
+
+</body>
+</html>
