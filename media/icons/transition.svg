@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="40" viewBox="0 0 140 40">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="4" width="140" height="36" rx="6" fill="#000000" fill-opacity="0.3"/>
+  <rect width="140" height="36" rx="6" fill="#508c83"/>
+  <rect width="140" height="36" rx="6" fill="url(#bg)"/>
+  <rect width="140" height="17" rx="6" fill="url(#shine)"/>
+  <g transform="translate(12, 8)">
+    <svg viewBox="0 0 24 24" width="20" height="20">
+      <path d="M17 15L14 12V14H10V12L7 15L10 18V16H14V18M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2M18 20H6V4H13V9H18Z" fill="#ffffff"/>
+    </svg>
+  </g>
+  <text x="40" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#ffffff">Transition</text>
+</svg>

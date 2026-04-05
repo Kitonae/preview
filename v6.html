@@ -132,16 +132,6 @@
       display: flex;
       align-items: center;
     }
-    .hero-orb {
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(139,92,246,0.13) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
-      pointer-events: none;
-    }
     .hero {
       position: relative;
       max-width: 1200px;
@@ -286,8 +276,8 @@
     .hero-video-player {
       max-width: 100%;
       height: auto;
-      border-radius: 16px;
-      border: 4px solid #333;
+      border-radius: 12px;
+      border: 8px solid #333;
       display: inline-block;
       background: var(--bg);
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
@@ -320,46 +310,63 @@
     .phase-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
     .phase-card p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
 
-    /* ── FEATURE GRID ─────────────────────────── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.25rem;
+    /* ── FEATURE LIST ──────────────────────────── */
+    .feature-list {
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
     }
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    .feature-item {
+      border-bottom: 1px solid var(--border);
     }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-      border-color: rgba(139,92,246,0.2);
-    }
-    .feature-card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: var(--accent-glow);
+    .feature-item summary {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      margin-bottom: 1.25rem;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      list-style: none;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      transition: color 0.2s;
     }
-    .feature-card h3 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 0.75rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .tag {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      white-space: nowrap;
+    .feature-item summary::-webkit-details-marker { display: none; }
+    .feature-item summary::after {
+      content: '+';
+      font-size: 1.25rem;
       font-weight: 300;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+    .feature-item[open] summary::after {
+      content: '\2212';
+    }
+    .feature-item summary:hover { color: var(--accent); }
+    .feature-item-body {
+      padding: 0 0 1.25rem;
+    }
+    .feature-item-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .feature-item-body li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .feature-item-body li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-muted);
     }
 
     /* ── TWO-COL ──────────────────────────────── */
@@ -455,19 +462,46 @@
     /* ── HIGHLIGHTS ────────────────────────────── */
     .highlight-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
     }
-    .highlight-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: transform 0.3s, box-shadow 0.3s;
+    .highlight-item {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
     }
-    .highlight-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
-    .highlight-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
-    .highlight-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+    .highlight-icon {
+      width: 100%;
+      aspect-ratio: 1;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      order: 1;
+      -webkit-mask-image: linear-gradient(to bottom, white 10%, transparent 70%);
+      mask-image: linear-gradient(to bottom, white 10%, transparent 70%);
+    }
+    .highlight-icon svg {
+      width: 40%;
+      height: 40%;
+      stroke: var(--text);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .highlight-item h3 {
+      font-family: 'FuturaNowHeadline', 'Futura', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .highlight-item p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
 
     /* ── REPORT MOCK ───────────────────────────── */
     .report-mock {
@@ -531,6 +565,50 @@
     footer .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; font-weight: 400; }
     footer .footer-links a:hover { color: var(--text); }
 
+
+    /* ── PARTICLE BURST ─────────────────────── */
+    .icon-particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 10;
+      animation: particleBurst 0.6s ease-out forwards;
+    }
+    @keyframes particleBurst {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+    }
+
+    /* ── INTERACTIVE ICONS ──────────────────── */
+    .highlight-icon svg {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.4s ease;
+    }
+    .highlight-icon svg path,
+    .highlight-icon svg circle {
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.65, 0, 0.35, 1),
+                  stroke 0.3s ease;
+    }
+    .highlight-item:hover .highlight-icon svg {
+      transform: scale(1.15) rotate(-3deg);
+      filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.4));
+    }
+    .highlight-item:hover .highlight-icon svg path,
+    .highlight-item:hover .highlight-icon svg circle {
+      stroke: var(--accent);
+    }
+    .highlight-item {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      border-radius: var(--radius);
+      cursor: default;
+    }
+    .highlight-item:hover {
+      transform: translateY(-4px);
+    }
+
     /* ── ANIMATIONS ────────────────────────────── */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(28px); }
@@ -550,8 +628,12 @@
     /* ── RESPONSIVE ────────────────────────────── */
     @media (max-width: 1024px) {
       .pipeline-grid { grid-template-columns: repeat(3, 1fr); }
-      .highlight-grid { grid-template-columns: repeat(2, 1fr); }
+      .highlight-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
       .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .highlight-icon svg, .highlight-icon svg path, .highlight-icon svg circle { transition: none; }
+      .icon-particle { animation: none; display: none; }
     }
     @media (max-width: 768px) {
       .section { padding: 4.5rem 1.25rem; }
@@ -567,26 +649,9 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="logo">WATCHOUT<span>7</span></a>
-      <div class="nav-links">
-        <a href="#process">How It Works</a>
-        <a href="#features">What Transfers</a>
-        <a href="#precision">Precision</a>
-        <a href="#highlights">Why It Works</a>
-        <a href="#report">Report</a>
-        <a href="#" class="btn-nav">Get WATCHOUT 7</a>
-      </div>
-    </div>
-  </nav>
-
   <!-- HERO -->
   <div class="hero-wrap">
-    <div class="hero-orb"></div>
     <div class="hero">
-      <div class="hero-pill">New in WATCHOUT 7</div>
       <h1>Bring Your Legacy<br>Shows <em>Forward</em></h1>
       <p class="hero-sub">
         Import your WATCHOUT&nbsp;6 shows directly into WATCHOUT&nbsp;7. Your timelines, cues, media, displays, and stage setup transfer automatically&thinsp;&mdash;&thinsp;so you can keep creating instead of rebuilding.
@@ -623,7 +688,7 @@
   <!-- PIPELINE -->
   <section id="process" class="section">
     <div class="section-header fade-in">
-      <div class="section-label">How It Works</div>
+
       <h2 class="section-title">Five Steps. One Click.</h2>
       <p class="section-subtitle">Open your .watch file and the importer takes care of everything&thinsp;&mdash;&thinsp;from reading your legacy show to delivering a complete summary of what was brought over.</p>
     </div>
@@ -659,83 +724,88 @@
   <!-- FEATURES -->
   <section id="features" class="section">
     <div class="section-header fade-in">
-      <div class="section-label">What Transfers</div>
+
       <h2 class="section-title">Comprehensive Coverage</h2>
       <p class="section-subtitle">From still images to 3D models, from simple fades to complex motion paths&thinsp;&mdash;&thinsp;the importer brings across the full breadth of your WATCHOUT&nbsp;6 show.</p>
     </div>
-    <div class="feature-grid">
+    <div class="feature-list">
 
-      <div class="feature-card fade-in" style="transition-delay:0s">
-        <div class="feature-card-icon">&#127912;</div>
-        <h3>Media</h3>
-        <div class="tags">
-          <span class="tag">Still Images</span>
-          <span class="tag">Video</span>
-          <span class="tag">Audio</span>
-          <span class="tag">Text</span>
-          <span class="tag">Compositions</span>
-          <span class="tag">3D Models</span>
-          <span class="tag">Virtual Displays</span>
-          <span class="tag">Solid Colors</span>
-          <span class="tag">Image Sequences</span>
+      <details class="feature-item fade-in" style="transition-delay:0s">
+        <summary>Media</summary>
+        <div class="feature-item-body">
+          <ul>
+            <li>Still Images</li>
+            <li>Video</li>
+            <li>Audio</li>
+            <li>Text</li>
+            <li>Compositions</li>
+            <li>3D Models</li>
+            <li>Virtual Displays</li>
+            <li>Solid Colors</li>
+            <li>Image Sequences</li>
+          </ul>
         </div>
-      </div>
+      </details>
 
-      <div class="feature-card fade-in" style="transition-delay:0.08s">
-        <div class="feature-card-icon">&#9654;</div>
-        <h3>Cues &amp; Playback</h3>
-        <div class="tags">
-          <span class="tag">Image Cues</span>
-          <span class="tag">Video &amp; Audio Cues</span>
-          <span class="tag">Composition Cues</span>
-          <span class="tag">3D Model Cues</span>
-          <span class="tag">Control Cues</span>
-          <span class="tag">Level Cues</span>
-          <span class="tag">Looping &amp; Speed</span>
+      <details class="feature-item fade-in" style="transition-delay:0.08s">
+        <summary>Cues &amp; Playback</summary>
+        <div class="feature-item-body">
+          <ul>
+            <li>Image Cues</li>
+            <li>Video &amp; Audio Cues</li>
+            <li>Composition Cues</li>
+            <li>3D Model Cues</li>
+            <li>Control Cues</li>
+            <li>Level Cues</li>
+            <li>Looping &amp; Speed</li>
+          </ul>
         </div>
-      </div>
+      </details>
 
-      <div class="feature-card fade-in" style="transition-delay:0.16s">
-        <div class="feature-card-icon">&#12336;</div>
-        <h3>Animation &amp; Effects</h3>
-        <div class="tags">
-          <span class="tag">Position &amp; Motion Paths</span>
-          <span class="tag">Scale</span>
-          <span class="tag">Opacity</span>
-          <span class="tag">Rotation (all axes)</span>
-          <span class="tag">Crop</span>
-          <span class="tag">Volume</span>
-          <span class="tag">Wipe Transitions</span>
-          <span class="tag">Corner Pin</span>
-          <span class="tag">Contrast &amp; Brightness</span>
+      <details class="feature-item fade-in" style="transition-delay:0.16s">
+        <summary>Animation &amp; Effects</summary>
+        <div class="feature-item-body">
+          <ul>
+            <li>Position &amp; Motion Paths</li>
+            <li>Scale</li>
+            <li>Opacity</li>
+            <li>Rotation (all axes)</li>
+            <li>Crop</li>
+            <li>Volume</li>
+            <li>Wipe Transitions</li>
+            <li>Corner Pin</li>
+            <li>Contrast &amp; Brightness</li>
+          </ul>
         </div>
-      </div>
+      </details>
 
-      <div class="feature-card fade-in" style="transition-delay:0.24s">
-        <div class="feature-card-icon">&#127899;</div>
-        <h3>Control &amp; Inputs</h3>
-        <div class="tags">
-          <span class="tag">Show Variables</span>
-          <span class="tag">MIDI Controllers</span>
-          <span class="tag">DMX / Art-Net</span>
-          <span class="tag">Variable Outputs</span>
-          <span class="tag">Fixture Outputs</span>
+      <details class="feature-item fade-in" style="transition-delay:0.24s">
+        <summary>Control &amp; Inputs</summary>
+        <div class="feature-item-body">
+          <ul>
+            <li>Show Variables</li>
+            <li>MIDI Controllers</li>
+            <li>DMX / Art-Net</li>
+            <li>Variable Outputs</li>
+            <li>Fixture Outputs</li>
+          </ul>
         </div>
-      </div>
+      </details>
 
-      <div class="feature-card fade-in" style="transition-delay:0.32s">
-        <div class="feature-card-icon">&#128421;</div>
-        <h3>Stage &amp; Displays</h3>
-        <div class="tags">
-          <span class="tag">Displays</span>
-          <span class="tag">Projectors</span>
-          <span class="tag">Warp &amp; Geometry</span>
-          <span class="tag">Tiers</span>
-          <span class="tag">Network Nodes</span>
-          <span class="tag">Soft-Edge Blending</span>
-          <span class="tag">Lens &amp; Frustum</span>
+      <details class="feature-item fade-in" style="transition-delay:0.32s">
+        <summary>Stage &amp; Displays</summary>
+        <div class="feature-item-body">
+          <ul>
+            <li>Displays</li>
+            <li>Projectors</li>
+            <li>Warp &amp; Geometry</li>
+            <li>Tiers</li>
+            <li>Network Nodes</li>
+            <li>Soft-Edge Blending</li>
+            <li>Lens &amp; Frustum</li>
+          </ul>
         </div>
-      </div>
+      </details>
 
     </div>
   </section>
@@ -744,7 +814,7 @@
   <section id="precision" class="section">
     <div class="two-col">
       <div class="fade-in">
-        <div class="section-label">Accuracy</div>
+
         <h2 class="section-title">Pixel-Perfect Conversion</h2>
         <p class="section-subtitle" style="margin-bottom:2rem;">WATCHOUT 6 and 7 handle positions, sizes, and values differently. The importer automatically adjusts every detail so your show looks exactly the way you designed it.</p>
         <ul>
@@ -815,34 +885,66 @@
   <!-- HIGHLIGHTS -->
   <section id="highlights" class="section">
     <div class="section-header fade-in">
-      <div class="section-label">Built to Last</div>
+
       <h2 class="section-title">Why It Works</h2>
       <p class="section-subtitle">The importer was designed to handle real-world shows of any size and complexity, with reliability you can trust on show day.</p>
     </div>
 
     <div class="highlight-grid">
-      <div class="highlight-card fade-in" style="transition-delay:0s">
-        <h3>&#127919;&ensp;Handles Every Version</h3>
-        <p>Whether your show was created in an early WATCHOUT 6 release or the latest 6.5.1 update, the importer recognizes and converts it correctly.</p>
+      <div class="highlight-item fade-in" style="transition-delay:0s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+        </div>
+        <h3>Every Version</h3>
+        <p>Whether your show was created in an early WATCHOUT 6 release or the latest update, the importer recognizes and converts it correctly.</p>
       </div>
-      <div class="highlight-card fade-in" style="transition-delay:0.08s">
-        <h3>&#128260;&ensp;Live Progress</h3>
+      <div class="highlight-item fade-in" style="transition-delay:0.08s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Live Progress</h3>
         <p>Watch the import happen in real time. A progress dialog keeps you informed at every step, and you can cancel at any moment.</p>
       </div>
-      <div class="highlight-card fade-in" style="transition-delay:0.16s">
-        <h3>&#128640;&ensp;Automatic Media Linking</h3>
-        <p>Your images, videos, audio, and 3D models are automatically registered with the WATCHOUT 7 media library, preserving your original folder structure.</p>
+      <div class="highlight-item fade-in" style="transition-delay:0.16s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L20.5 3.5M21 16v5h-5M14 14l6.5 6.5M3 8V3h5M10 10L3.5 3.5"/></svg>
+        </div>
+        <h3>Automatic Media</h3>
+        <p>Images, videos, audio, and 3D models are linked to the WATCHOUT 7 media library automatically, preserving your folder structure.</p>
       </div>
-      <div class="highlight-card fade-in" style="transition-delay:0.24s">
-        <h3>&#127922;&ensp;3D Model Support</h3>
+      <div class="highlight-item fade-in" style="transition-delay:0.24s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+        </div>
+        <h3>3D Model Support</h3>
         <p>3D models with multiple textures are brought over with each texture mapped to the correct surface, ready to use immediately.</p>
       </div>
-      <div class="highlight-card fade-in" style="transition-delay:0.32s">
-        <h3>&#128200;&ensp;Nothing Gets Lost</h3>
-        <p>If something can't be converted, you'll know. The import report clearly lists anything that needs manual attention.</p>
+      <div class="highlight-item fade-in" style="transition-delay:0.32s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <h3>Full Transparency</h3>
+        <p>A detailed report shows exactly what was imported, what needs attention, and if any media files are missing.</p>
       </div>
-      <div class="highlight-card fade-in" style="transition-delay:0.4s">
-        <h3>&#9889;&ensp;Fast &amp; Reliable</h3>
+      <div class="highlight-item fade-in" style="transition-delay:0.4s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Coordinate Precision</h3>
+        <p>Positions, scales, anchor points, and motion paths are automatically remapped so your show looks exactly as designed.</p>
+      </div>
+      <div class="highlight-item fade-in" style="transition-delay:0.48s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3"/></svg>
+        </div>
+        <h3>Nothing Gets Lost</h3>
+        <p>If something can't be converted, you'll know. The report clearly lists anything that needs your manual attention.</p>
+      </div>
+      <div class="highlight-item fade-in" style="transition-delay:0.56s">
+        <div class="highlight-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Fast &amp; Reliable</h3>
         <p>Even large shows with hundreds of cues, complex timelines, and dozens of displays import quickly and accurately.</p>
       </div>
     </div>
@@ -852,7 +954,7 @@
   <section id="report" class="section">
     <div class="two-col">
       <div class="fade-in">
-        <div class="section-label">Transparency</div>
+
         <h2 class="section-title">Know Exactly What Happened</h2>
         <p class="section-subtitle" style="margin-bottom:2rem;">Every import produces a clear, readable report so you always know what was brought over and what might need your attention.</p>
         <ul>
@@ -889,26 +991,15 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-brand">WATCHOUT<span>&thinsp;7</span></div>
-    <div class="footer-sub">by Dataton</div>
-    <div class="footer-links">
-      <a href="#">Documentation</a>
-      <a href="#">Release Notes</a>
-      <a href="#">Support</a>
-    </div>
-    <div>&copy; 2024 Dataton AB. All rights reserved.</div>
-  </footer>
-
   <script>
+    // ── Fade-in observer ──────────────────────
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+    if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
@@ -916,6 +1007,95 @@
         if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
+
+    // ── Particle burst on icon hover ──────────
+    (function() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      const colors = ['#a78bfa', '#8b5cf6', '#c4b5fd', '#ddd6fe'];
+
+      document.querySelectorAll('.highlight-item').forEach(card => {
+        let bursting = false;
+
+        card.addEventListener('mouseenter', () => {
+          if (bursting) return;
+          bursting = true;
+
+          const icon = card.querySelector('.highlight-icon');
+          if (!icon) { bursting = false; return; }
+
+          const iconRect = icon.getBoundingClientRect();
+          const cardRect = card.getBoundingClientRect();
+          const cx = iconRect.left - cardRect.left + iconRect.width / 2;
+          const cy = iconRect.top - cardRect.top + iconRect.height / 2;
+
+          const count = 14;
+          for (let i = 0; i < count; i++) {
+            const span = document.createElement('span');
+            span.className = 'icon-particle';
+            const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.5;
+            const dist = 30 + Math.random() * 40;
+            const size = 3 + Math.random() * 3;
+            span.style.width = size + 'px';
+            span.style.height = size + 'px';
+            span.style.left = cx + 'px';
+            span.style.top = cy + 'px';
+            span.style.background = colors[Math.floor(Math.random() * colors.length)];
+            span.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+            span.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+            card.appendChild(span);
+          }
+
+          setTimeout(() => {
+            card.querySelectorAll('.icon-particle').forEach(p => p.remove());
+            bursting = false;
+          }, 650);
+        });
+      });
+    })();
+
+    // ── SVG stroke-draw on scroll ─────────────
+    (function() {
+      document.querySelectorAll('.highlight-icon svg').forEach(svg => {
+        svg.querySelectorAll('path, circle').forEach(p => {
+          try {
+            const len = p.getTotalLength();
+            p.style.strokeDasharray = len;
+            p.style.strokeDashoffset = len;
+          } catch(e) {}
+        });
+      });
+
+      const iconObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.querySelectorAll('path, circle').forEach((p, i) => {
+              p.style.transitionDelay = (i * 0.15) + 's';
+              p.style.strokeDashoffset = '0';
+            });
+            iconObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.highlight-icon').forEach(el => iconObs.observe(el));
+    })();
+
+    // ── 3D tilt on highlight cards ────────────
+    (function() {
+      document.querySelectorAll('.highlight-item').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = 'translateY(-4px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    })();
   </script>
 
 </body>

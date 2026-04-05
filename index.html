@@ -124,6 +124,107 @@
     }
     .section-header { margin-bottom: 4rem; }
 
+    /* ── FLOATING ICONS ────────────────────────── */
+    .floating-icon {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.07;
+      z-index: 0;
+      width: 40px;
+    }
+    .floating-icon svg {
+      fill: var(--accent);
+    }
+    .fi-1  { top: 6%;  left: 4%;  transform: rotate(-15deg); }
+    .fi-2  { top: 14%; right: 6%; transform: rotate(25deg); }
+    .fi-3  { top: 32%; left: 2%;  transform: rotate(10deg); }
+    .fi-4  { top: 4%;  left: 38%; transform: rotate(-30deg); }
+    .fi-5  { top: 22%; right: 3%; transform: rotate(45deg); }
+    .fi-6  { top: 42%; left: 10%; transform: rotate(-8deg); }
+    .fi-7  { top: 10%; left: 20%; transform: rotate(60deg); }
+    .fi-8  { top: 38%; right: 8%; transform: rotate(-20deg); }
+    .fi-9  { top: 2%;  right: 22%;transform: rotate(35deg); }
+    .fi-10 { top: 48%; left: 28%; transform: rotate(-45deg); }
+    .fi-11 { top: 16%; left: 52%; transform: rotate(12deg); }
+    .fi-12 { top: 46%; right: 18%;transform: rotate(-55deg); }
+    .fi-13 { top: 8%;  right: 38%;transform: rotate(18deg); }
+    .fi-14 { top: 28%; left: 8%;  transform: rotate(-35deg); }
+    .fi-15 { top: 52%; left: 5%;  transform: rotate(22deg); }
+    .fi-16 { top: 36%; left: 42%; transform: rotate(-12deg); }
+    .fi-17 { top: 20%; right: 15%;transform: rotate(40deg); }
+    .fi-18 { top: 50%; right: 5%; transform: rotate(-28deg); }
+    .fi-19 { top: 12%; left: 65%; transform: rotate(8deg); }
+    .fi-20 { top: 44%; left: 18%; transform: rotate(-50deg); }
+    .fi-21 { top: 3%;  left: 15%; transform: rotate(30deg); }
+    .fi-22 { top: 34%; right: 14%;transform: rotate(-18deg); }
+    .fi-23 { top: 54%; left: 45%; transform: rotate(55deg); }
+    .fi-24 { top: 18%; left: 35%; transform: rotate(-40deg); }
+    .fi-25 { top: 40%; right: 30%;transform: rotate(15deg); }
+    .fi-26 { top: 26%; left: 58%; transform: rotate(-25deg); }
+    .fi-27 { top: 56%; right: 12%;transform: rotate(32deg); }
+    .fi-28 { top: 8%;  right: 48%;transform: rotate(-60deg); }
+    .fi-29 { top: 50%; left: 55%; transform: rotate(5deg); }
+
+    /* ── FOREGROUND ICONS — TORNADO ──────────────── */
+    .tornado-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      margin-bottom: -2rem;
+    }
+    .fg-icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      pointer-events: auto;
+      z-index: 2;
+      cursor: pointer;
+      will-change: transform;
+    }
+    .fg-icon img {
+      height: 100%;
+      width: auto;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fg-icon:hover img {
+      transform: scale(1.25);
+    }
+    .fg-icon.bounce img {
+      animation: fgBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes fgBounce {
+      0%   { transform: scale(1.25); }
+      30%  { transform: scale(0.8); }
+      60%  { transform: scale(1.35); }
+      100% { transform: scale(1.25); }
+    }
+
+    /* Tornado orbit — JS drives the elliptical path via requestAnimationFrame */
+
+    /* Wind streaks SVG overlay */
+    .tornado-streaks {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .tornado-streaks path {
+      fill: none;
+      stroke-linecap: round;
+    }
+
+    /* Icon sizes by height — bottom of funnel smaller, top bigger */
+    .fgi-1 { height: 36px; }
+    .fgi-2 { height: 40px; }
+    .fgi-3 { height: 46px; }
+    .fgi-4 { height: 52px; }
+    .fgi-5 { height: 52px; }
+    .fgi-6 { height: 58px; }
+    .fgi-7 { height: 62px; }
+    .fgi-8 { height: 66px; }
+    .fgi-9 { height: 72px; }
+
     /* ── HERO ──────────────────────────────────── */
     .hero-wrap {
       position: relative;
@@ -136,8 +237,16 @@
       position: relative;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 8rem 2rem 6rem;
+      padding: 4rem 2rem 6rem;
       text-align: center;
+    }
+    .hero-box {
+      display: block;
+      width: 360px;
+      margin: 0 auto -8rem;
+      position: relative;
+      z-index: 0;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
     }
     .hero-pill {
       display: inline-block;
@@ -155,12 +264,14 @@
     }
     .hero h1 {
       font-family: 'FuturaNowHeadline', 'Futura', sans-serif;
-      font-size: clamp(2.75rem, 6vw, 5rem);
+      font-size: clamp(2.75rem, 6vw, 7rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.05;
       margin-bottom: 1.5rem;
       animation: fadeInUp 0.6s ease 0.1s both;
+      position: relative;
+      z-index: 2;
     }
     .hero h1 em {
       font-style: normal;
@@ -276,8 +387,8 @@
     .hero-video-player {
       max-width: 100%;
       height: auto;
-      border-radius: 16px;
-      border: 4px solid #333;
+      border-radius: 12px;
+      border: 8px solid #333;
       display: inline-block;
       background: var(--bg);
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
@@ -307,6 +418,33 @@
       margin-bottom: 1rem;
       letter-spacing: -0.04em;
     }
+    .phase-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1rem;
+    }
+    .phase-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--accent);
+      opacity: 0.6;
+      transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .phase-card:hover .phase-icon svg {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+    /* per-icon hover animations */
+    .phase-card:hover .pi-open svg    { animation: piPulse 0.6s ease; }
+    .phase-card:hover .pi-analyze svg { animation: piSpin 0.8s ease; }
+    .phase-card:hover .pi-convert svg { animation: piFlipX 0.6s ease; }
+    .phase-card:hover .pi-media svg   { animation: piBounce 0.5s ease; }
+    .phase-card:hover .pi-review svg  { animation: piPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes piPulse  { 0%,100% { transform: scale(1.15); } 50% { transform: scale(1.35); } }
+    @keyframes piSpin   { 0% { transform: rotate(0deg) scale(1.15); } 100% { transform: rotate(360deg) scale(1.15); } }
+    @keyframes piFlipX  { 0% { transform: scaleX(1) scale(1.15); } 50% { transform: scaleX(-1) scale(1.15); } 100% { transform: scaleX(1) scale(1.15); } }
+    @keyframes piBounce { 0%,100% { transform: translateY(0) scale(1.15); } 40% { transform: translateY(-8px) scale(1.15); } }
+    @keyframes piPop    { 0% { transform: scale(0.8); } 50% { transform: scale(1.4); } 100% { transform: scale(1.15); } }
     .phase-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
     .phase-card p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
 
@@ -343,7 +481,17 @@
     }
     .feature-item summary:hover { color: var(--accent); }
     .feature-item-body {
-      padding: 0 0 1.25rem;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease, padding 0.35s ease;
+      padding: 0;
+    }
+    .feature-item[open] .feature-item-body {
+      grid-template-rows: 1fr;
+      padding-bottom: 1.25rem;
+    }
+    .feature-item-body > ul {
+      overflow: hidden;
     }
     .feature-item-body ul {
       list-style: none;
@@ -357,16 +505,38 @@
       font-weight: 300;
       padding-left: 1.25rem;
       position: relative;
+      overflow: visible;
     }
     .feature-item-body li::before {
-      content: '';
+      content: '✓';
       position: absolute;
       left: 0;
-      top: 0.6em;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--text-muted);
+      top: 0;
+      font-size: 0.8em;
+      font-weight: 700;
+      color: #ffffff;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .feature-item-body li.ticked::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── CTA ──────────────────────────────────── */
+    .cta-section {
+      border-top: 1px solid var(--border);
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-cta {
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
     }
 
     /* ── TWO-COL ──────────────────────────────── */
@@ -565,30 +735,19 @@
     footer .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; font-weight: 400; }
     footer .footer-links a:hover { color: var(--text); }
 
-    /* ── PARTICLE CANVAS ─────────────────────── */
-    #hero-particles {
+
+    /* ── PARTICLE BURST ─────────────────────── */
+    .icon-particle {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
+      border-radius: 50%;
+      background: var(--accent);
       pointer-events: none;
+      z-index: 10;
+      animation: particleBurst 0.6s ease-out forwards;
     }
-    .hero-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background: radial-gradient(
-        600px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-        rgba(139, 92, 246, 0.08) 0%,
-        transparent 70%
-      );
-      pointer-events: none;
-      transition: background 0.3s ease;
-    }
-    .hero {
-      z-index: 1;
+    @keyframes particleBurst {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
     }
 
     /* ── INTERACTIVE ICONS ──────────────────── */
@@ -610,6 +769,8 @@
       stroke: var(--accent);
     }
     .highlight-item {
+      position: relative;
+      overflow: hidden;
       transition: transform 0.3s ease;
       border-radius: var(--radius);
       cursor: default;
@@ -641,9 +802,10 @@
       .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      #hero-particles { display: none; }
-      .hero-wrap::before { background: radial-gradient(600px circle at 50% 40%, rgba(139,92,246,0.06) 0%, transparent 70%); }
       .highlight-icon svg, .highlight-icon svg path, .highlight-icon svg circle { transition: none; }
+      .icon-particle { animation: none; display: none; }
+      .tornado-container { height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .fg-icon { position: static !important; transform: none !important; opacity: 1 !important; }
     }
     @media (max-width: 768px) {
       .section { padding: 4.5rem 1.25rem; }
@@ -651,7 +813,8 @@
       .feature-grid { grid-template-columns: 1fr; }
       .highlight-grid { grid-template-columns: 1fr; }
       .nav-links a:not(.btn-nav) { display: none; }
-      .hero { padding: 5rem 1.25rem 3rem; }
+      .hero { padding: 3rem 1.25rem 3rem; }
+      .tornado-container { height: 180px; }
       .hero-visual { flex-direction: column; }
       .arrow-flow { transform: rotate(90deg); }
     }
@@ -661,19 +824,58 @@
 
   <!-- HERO -->
   <div class="hero-wrap">
-    <canvas id="hero-particles"></canvas>
+    <!-- Floating icons -->
+    <div class="floating-icon fi-1"><svg viewBox="0 0 24 24"><path d="M6,18V6H8V18H6M9.5,12L18,6V18L9.5,12Z"/></svg></div>
+    <div class="floating-icon fi-2"><svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4C7.59,4 4,7.59 4,12C4,16.41 7.59,20 12,20C16.41,20 20,16.41 20,12C20,7.59 16.41,4 12,4M16,8V16L11,12M10,8V16H8V8"/></svg></div>
+    <div class="floating-icon fi-3"><svg viewBox="0 0 24 24"><path d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"/></svg></div>
+    <div class="floating-icon fi-4"><svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M8,8V16L13,12M14,8V16H16V8"/></svg></div>
+    <div class="floating-icon fi-5"><svg viewBox="0 0 24 24"><path d="M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z"/></svg></div>
+    <div class="floating-icon fi-6"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M12 20C7.59 20 4 16.41 4 12S7.59 4 12 4 20 7.59 20 12 16.41 20 12 20M15 6.5V9H11V11H15V13.5L18.5 10L15 6.5M9 10.5L5.5 14L9 17.5V15H13V13H9V10.5Z"/></svg></div>
+    <div class="floating-icon fi-7"><svg viewBox="0 0 24 24"><path d="M10.05 16.94V12.94H18.97L19 10.93H10.05V6.94L5.05 11.94Z"/></svg></div>
+    <div class="floating-icon fi-8"><svg viewBox="0 0 24 24"><path d="M3.97 12C3.97 16.41 7.59 20.03 12 20.03C16.41 20.03 20.03 16.41 20.03 12C20.03 7.59 16.41 3.97 12 3.97C7.59 3.97 3.97 7.59 3.97 12M2 12C2 6.46 6.46 2 12 2C17.54 2 22 6.46 22 12C22 17.54 17.54 22 12 22C6.46 22 2 17.54 2 12M10.46 11V8L6.5 12L10.46 16V13H17.5V11"/></svg></div>
+    <div class="floating-icon fi-9"><svg viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z"/></svg></div>
+    <div class="floating-icon fi-10"><svg viewBox="0 0 24 24"><path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z"/></svg></div>
+    <div class="floating-icon fi-11"><svg viewBox="0 0 24 24"><path d="M14,19H18V5H14M6,19H10V5H6V19Z"/></svg></div>
+    <div class="floating-icon fi-12"><svg viewBox="0 0 24 24"><path d="M13,16V8H15V16H13M9,16V8H11V16H9M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/></svg></div>
+    <div class="floating-icon fi-13"><svg viewBox="0 0 24 24"><path d="M18,18H6V6H18V18Z"/></svg></div>
+    <div class="floating-icon fi-14"><svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M9,9V15H15V9"/></svg></div>
+    <div class="floating-icon fi-15"><svg viewBox="0 0 24 24"><path d="M4.94,6.35C4.55,5.96 4.55,5.32 4.94,4.93C5.33,4.54 5.96,4.54 6.35,4.93L13.07,10.31L13.42,10.59C14.2,11.37 14.2,12.64 13.42,13.42C12.64,14.2 11.37,14.2 10.59,13.42L10.31,13.07L4.94,6.35M12,20A8,8 0 0,0 20,12C20,9.79 19.1,7.79 17.66,6.34L19.07,4.93C20.88,6.74 22,9.24 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12H4A8,8 0 0,0 12,20M12,1A2,2 0 0,1 14,3A2,2 0 0,1 12,5A2,2 0 0,1 10,3A2,2 0 0,1 12,1Z"/></svg></div>
+    <div class="floating-icon fi-16"><svg viewBox="0 0 24 24"><path d="M17,14H19V17H22V19H19V22H17V19H14V17H17V14M12,17V15H7V17H12M17,11H7V13H14.69C13.07,14.07 12,15.91 12,18C12,19.09 12.29,20.12 12.8,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19A2,2 0 0,1 21,5V12.8C20.12,12.29 19.09,12 18,12L17,12.08V11M17,9V7H7V9H17Z"/></svg></div>
+    <div class="floating-icon fi-17"><svg viewBox="0 0 24 24"><path d="M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/></svg></div>
+    <div class="floating-icon fi-18"><svg viewBox="0 0 24 24"><path d="M10,16L5,11L6.41,9.58L10,13.17L17.59,5.58L19,7M19,1H5C3.89,1 3,1.89 3,3V15.93C3,16.62 3.35,17.23 3.88,17.59L12,23L20.11,17.59C20.64,17.23 21,16.62 21,15.93V3C21,1.89 20.1,1 19,1Z"/></svg></div>
+    <div class="floating-icon fi-19"><svg viewBox="0 0 24 24"><path d="M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z"/></svg></div>
+    <div class="floating-icon fi-20"><svg viewBox="0 0 24 24"><path d="M8 12.14V2H6V12.14C4.28 12.59 3 14.14 3 16S4.28 19.41 6 19.86V22H8V19.86C9.72 19.41 11 17.86 11 16S9.72 12.59 8 12.14M7 14C8.1 14 9 14.9 9 16S8.1 18 7 18C5.9 18 5 17.1 5 16S5.9 14 7 14M18 2H16V4.14C14.28 4.59 13 6.14 13 8S14.28 11.41 16 11.86V22H18V11.86C19.72 11.41 21 9.86 21 8S19.72 4.59 18 4.14V2M17 6C18.1 6 19 6.9 19 8S18.1 10 17 10C15.9 10 15 9.1 15 8S15.9 6 17 6Z"/></svg></div>
+    <div class="floating-icon fi-21"><svg viewBox="0 0 24 24"><path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/></svg></div>
+    <div class="floating-icon fi-22"><svg viewBox="0 0 24 24"><path d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg></div>
+    <div class="floating-icon fi-23"><svg viewBox="0 0 24 24"><path d="M21.82,15.42L19.32,19.75C18.83,20.61 17.92,21.06 17,21H15V23L12.5,18.5L15,14V16H17.82L15.6,12.15L19.93,9.65L21.73,12.77C22.25,13.54 22.32,14.57 21.82,15.42M9.21,3.06H14.21C15.19,3.06 16.04,3.63 16.45,4.45L17.45,6.19L19.18,5.19L16.54,9.6L11.39,9.69L13.12,8.69L11.71,6.24L9.5,10.09L5.16,7.59L6.96,4.47C7.37,3.64 8.22,3.06 9.21,3.06M5.05,19.76L2.55,15.43C2.06,14.58 2.13,13.56 2.64,12.79L3.64,11.06L1.91,10.06L7.05,10.14L9.7,14.56L7.97,13.56L6.56,16H11V21H7.4C6.47,21.07 5.55,20.61 5.05,19.76Z"/></svg></div>
+    <div class="floating-icon fi-24"><svg viewBox="0 0 24 24"><path d="M13.5,5.5C14.59,5.5 15.5,4.58 15.5,3.5C15.5,2.38 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.38 11.5,3.5C11.5,4.58 12.39,5.5 13.5,5.5M9.89,19.38L10.89,15L13,17V23H15V15.5L12.89,13.5L13.5,10.5C14.79,12 16.79,13 19,13V11C17.09,11 15.5,10 14.69,8.58L13.69,7C13.29,6.38 12.69,6 12,6C11.69,6 11.5,6.08 11.19,6.08L6,8.28V13H8V9.58L9.79,8.88L8.19,17L3.29,16L2.89,18L9.89,19.38Z"/></svg></div>
+    <div class="floating-icon fi-25"><svg viewBox="0 0 24 24"><path d="M12,18A6,6 0 0,1 6,12C6,11 6.25,10.03 6.7,9.2L5.24,7.74C4.46,8.97 4,10.43 4,12A8,8 0 0,0 12,20V23L16,19L12,15M12,4V1L8,5L12,9V6A6,6 0 0,1 18,12C18,13 17.75,13.97 17.3,14.8L18.76,16.26C19.54,15.03 20,13.57 20,12A8,8 0 0,0 12,4Z"/></svg></div>
+    <div class="floating-icon fi-26"><svg viewBox="0 0 24 24"><path d="M19.31,5.6C18.09,5.56 16.88,6.5 16.5,8C16,10 16,10 15,11C13,13 10,14 4,15C3,15.16 2.5,15.5 2,16C4,16 6,16 4.5,17.5L3,19H6L8,17C10,18 11.33,18 13.33,17L14,19H17L16,16C16,16 17,12 18,11C19,10 19,11 20,11C21,11 22,10 22,8.5C22,8 22,7 20.5,6C20.15,5.76 19.74,5.62 19.31,5.6M9,6A6,6 0 0,0 3,12C3,12.6 3.13,13.08 3.23,13.6C9.15,12.62 12.29,11.59 13.93,9.94L14.43,9.44C13.44,7.34 11.32,6 9,6Z"/></svg></div>
+    <div class="floating-icon fi-27"><svg viewBox="0 0 24 24"><path d="M19,11.5C19,11.5 17,13.67 17,15A2,2 0 0,0 19,17A2,2 0 0,0 21,15C21,13.67 19,11.5 19,11.5M5.21,10L10,5.21L14.79,10M16.56,8.94L7.62,0L6.21,1.41L8.59,3.79L3.44,8.94C2.85,9.5 2.85,10.47 3.44,11.06L8.94,16.56C9.23,16.85 9.62,17 10,17C10.38,17 10.77,16.85 11.06,16.56L16.56,11.06C17.15,10.47 17.15,9.5 16.56,8.94Z"/></svg></div>
+    <div class="floating-icon fi-28"><svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg></div>
+    <div class="floating-icon fi-29"><svg viewBox="0 0 24 24"><path d="M18.05,21L15.32,16.26C15.32,14.53 14.25,13.42 12.95,13.42C12.05,13.42 11.27,13.92 10.87,14.66C11.2,14.47 11.59,14.37 12,14.37C13.3,14.37 14.36,15.43 14.36,16.73C14.36,18.04 13.31,19.11 12,19.11H15.3V21H6.79C6.55,21 6.3,20.91 6.12,20.72C5.75,20.35 5.75,19.75 6.12,19.38V19.38L6.62,18.88C6.28,18.73 6,18.5 5.72,18.26C5.5,18.76 5,19.11 4.42,19.11C3.64,19.11 3,18.47 3,17.68C3,16.9 3.64,16.26 4.42,16.26L4.89,16.34V14.37C4.89,11.75 7,9.63 9.63,9.63H9.65C11.77,9.64 13.42,10.47 13.42,9.16C13.42,8.23 13.62,7.86 13.96,7.34C13.23,7 12.4,6.79 11.53,6.79C11,6.79 10.58,6.37 10.58,5.84C10.58,5.41 10.86,5.05 11.25,4.93L10.58,4.89C10.06,4.89 9.63,4.47 9.63,3.95C9.63,3.42 10.06,3 10.58,3H11.53C13.63,3 15.47,4.15 16.46,5.85L16.74,5.84C17.45,5.84 18.11,6.07 18.65,6.45L19.1,6.83C21.27,8.78 21,10.1 21,10.11C21,11.39 19.94,12.44 18.65,12.44L18.16,12.39V12.47C18.16,13.58 17.68,14.57 16.93,15.27L20.24,21H18.05M18.16,7.74C17.63,7.74 17.21,8.16 17.21,8.68C17.21,9.21 17.63,9.63 18.16,9.63C18.68,9.63 19.11,9.21 19.11,8.68C19.11,8.16 18.68,7.74 18.16,7.74Z"/></svg></div>
+
     <div class="hero">
+      <div class="tornado-container">
+        <svg class="tornado-streaks" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="fg-icon fgi-1"><img src="media/icons/video.svg" alt=""></div>
+        <div class="fg-icon fgi-2"><img src="media/icons/artnet.svg" alt=""></div>
+        <div class="fg-icon fgi-3"><img src="media/icons/image.svg" alt=""></div>
+        <div class="fg-icon fgi-4"><img src="media/icons/composition.svg" alt=""></div>
+        <div class="fg-icon fgi-5"><img src="media/icons/transition.svg" alt=""></div>
+        <div class="fg-icon fgi-6"><img src="media/icons/skip-back.svg" alt=""></div>
+        <div class="fg-icon fgi-7"><img src="media/icons/export.svg" alt=""></div>
+        <div class="fg-icon fgi-8"><img src="media/icons/pause.svg" alt=""></div>
+        <div class="fg-icon fgi-9"><img src="media/icons/play.svg" alt=""></div>
+      </div>
+      <img src="media/box.png" alt="" class="hero-box">
       <h1>Bring Your Legacy<br>Shows <em>Forward</em></h1>
       <p class="hero-sub">
-        Import your WATCHOUT&nbsp;6 shows directly into WATCHOUT&nbsp;7. Your timelines, cues, media, displays, and stage setup transfer automatically&thinsp;&mdash;&thinsp;so you can keep creating instead of rebuilding.
+        Import your WATCHOUT&nbsp;6 shows directly into WATCHOUT&nbsp;7. Your timelines, cues, media, displays, and stage setup transfer automatically so you can keep creating instead of rebuilding.
       </p>
-      <div class="hero-actions">
-        <a href="#process" class="btn-primary">See How It Works</a>
-        <a href="#features" class="btn-ghost">Explore What Transfers</a>
-      </div>
       <div class="hero-visual">
         <div class="file-icon file-wo6">
-          <img src="WATCHMAKER.png" alt="WATCHMAKER" class="file-img">
+          <img src="media/WATCHMAKER.png" alt="WATCHMAKER" class="file-img">
           WATCHMAKER
         </div>
         <div class="arrow-flow">
@@ -684,13 +886,13 @@
           <span class="chevron" style="animation-delay:1.2s">&rsaquo;</span>
         </div>
         <div class="file-icon file-wo7">
-          <img src="wo7.png" alt="Producer" class="file-img">
+          <img src="media/wo7.png" alt="Producer" class="file-img">
           Producer
         </div>
       </div>
       <div class="hero-video fade-in">
         <video class="hero-video-player" autoplay loop muted playsinline>
-          <source src="placeholder-video.webm" type="video/webm">
+          <source src="media/placeholder-video.webm" type="video/webm">
         </video>
       </div>
     </div>
@@ -706,26 +908,31 @@
     <div class="pipeline-grid">
       <div class="phase-card fade-in" style="transition-delay:0s">
         <div class="phase-num">01</div>
+        <div class="phase-icon pi-open"><svg viewBox="0 0 24 24"><path d="M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8H21L4,8V18L6.14,10H23.21L20.93,18.5C20.7,19.37 19.92,20 19,20Z"/></svg></div>
         <h3>Open</h3>
         <p>Select your WATCHOUT 6 show file and the importer reads its contents automatically.</p>
       </div>
       <div class="phase-card fade-in" style="transition-delay:0.08s">
         <div class="phase-num">02</div>
+        <div class="phase-icon pi-analyze"><svg viewBox="0 0 24 24"><path d="M17,22V20H20V17H22V20.5C22,20.89 21.84,21.24 21.54,21.54C21.24,21.84 20.89,22 20.5,22H17M7,22H3.5C3.11,22 2.76,21.84 2.46,21.54C2.16,21.24 2,20.89 2,20.5V17H4V20H7V22M17,2H20.5C20.89,2 21.24,2.16 21.54,2.46C21.84,2.76 22,3.11 22,3.5V7H20V4H17V2M7,2V4H4V7H2V3.5C2,3.11 2.16,2.76 2.46,2.46C2.76,2.16 3.11,2 3.5,2H7M10.5,6C13,6 15,8 15,10.5C15,11.38 14.75,12.21 14.31,12.9L17.57,16.16L16.16,17.57L12.9,14.31C12.21,14.75 11.38,15 10.5,15C8,15 6,13 6,10.5C6,8 8,6 10.5,6M10.5,8C9.12,8 8,9.12 8,10.5C8,11.88 9.12,13 10.5,13C11.88,13 13,11.88 13,10.5C13,9.12 11.88,8 10.5,8Z"/></svg></div>
         <h3>Analyze</h3>
         <p>Every element of your show is identified&thinsp;&mdash;&thinsp;media, timelines, cues, displays, and settings&thinsp;&mdash;&thinsp;including shows from all WATCHOUT 6 versions.</p>
       </div>
       <div class="phase-card fade-in" style="transition-delay:0.16s">
         <div class="phase-num">03</div>
+        <div class="phase-icon pi-convert"><svg viewBox="0 0 24 24"><path d="M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z"/></svg></div>
         <h3>Convert</h3>
         <p>Show elements are translated to their WATCHOUT 7 equivalents, with positions, scales, and timing preserved precisely.</p>
       </div>
       <div class="phase-card fade-in" style="transition-delay:0.24s">
         <div class="phase-num">04</div>
+        <div class="phase-icon pi-media"><svg viewBox="0 0 24 24"><path d="M22,16V4A2,2 0 0,0 20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16M11,12L13.03,14.71L16,11L20,16H8M2,6V20A2,2 0 0,0 4,22H18V20H4V6"/></svg></div>
         <h3>Register Media</h3>
         <p>All your images, videos, audio files, and 3D models are automatically linked to the WATCHOUT 7 media library.</p>
       </div>
       <div class="phase-card fade-in" style="transition-delay:0.32s">
         <div class="phase-num">05</div>
+        <div class="phase-icon pi-review"><svg viewBox="0 0 24 24"><path d="M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3Z"/></svg></div>
         <h3>Review</h3>
         <p>A detailed report shows you exactly what was imported, what needs attention, and if any files are missing.</p>
       </div>
@@ -1002,6 +1209,19 @@
     </div>
   </section>
 
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="cta-inner fade-in">
+      <h2 class="section-title" style="text-align:center;">Ready to Move Forward?</h2>
+      <p class="section-subtitle" style="text-align:center; margin: 0 auto 3rem;">Take the next step — explore what's new or upgrade today.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-primary btn-cta">Upgrade Your Key to WATCHOUT 7</a>
+        <a href="#" class="btn-ghost btn-cta">Learn More About 7.8 Changes</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js"></script>
   <script>
     // ── Fade-in observer ──────────────────────
     const observer = new IntersectionObserver(entries => {
@@ -1019,114 +1239,305 @@
       });
     });
 
-    // ── Particle canvas ───────────────────────
+    // ── Particle burst on icon hover ──────────
     (function() {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReduced) return;
 
-      const canvas = document.getElementById('hero-particles');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const heroWrap = document.querySelector('.hero-wrap');
-      let particles = [];
-      let animId;
-      let isVisible = true;
-      let resizeTimer;
+      const colors = ['#fbbf24', '#f59e0b', '#fcd34d', '#fde68a'];
 
-      function resize() {
-        canvas.width = heroWrap.offsetWidth;
-        canvas.height = heroWrap.offsetHeight;
-        init();
-      }
+      document.querySelectorAll('.highlight-item').forEach(card => {
+        let bursting = false;
 
-      function init() {
-        const count = Math.min(Math.floor(canvas.width / 20), 80);
-        particles = Array.from({ length: count }, () => ({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 2 + 1,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          accent: Math.random() < 0.3
-        }));
-      }
+        card.addEventListener('mouseenter', () => {
+          if (bursting) return;
+          bursting = true;
 
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = 'rgba(167,139,250,' + (0.08 * (1 - dist / 120)) + ')';
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
+          const icon = card.querySelector('.highlight-icon');
+          if (!icon) { bursting = false; return; }
+
+          const iconRect = icon.getBoundingClientRect();
+          const cardRect = card.getBoundingClientRect();
+          const cx = iconRect.left - cardRect.left + iconRect.width / 2;
+          const cy = iconRect.top - cardRect.top + iconRect.height / 2;
+
+          const count = 14;
+          for (let i = 0; i < count; i++) {
+            const span = document.createElement('span');
+            span.className = 'icon-particle';
+            const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.5;
+            const dist = 30 + Math.random() * 40;
+            const size = 3 + Math.random() * 3;
+            span.style.width = size + 'px';
+            span.style.height = size + 'px';
+            span.style.left = cx + 'px';
+            span.style.top = cy + 'px';
+            span.style.background = colors[Math.floor(Math.random() * colors.length)];
+            span.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+            span.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+            card.appendChild(span);
           }
-        }
-        particles.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = p.accent ? 'rgba(167,139,250,0.25)' : 'rgba(255,255,255,0.06)';
-          ctx.fill();
+
+          setTimeout(() => {
+            card.querySelectorAll('.icon-particle').forEach(p => p.remove());
+            bursting = false;
+          }, 650);
         });
-      }
-
-      function update() {
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0) p.x = canvas.width;
-          if (p.x > canvas.width) p.x = 0;
-          if (p.y < 0) p.y = canvas.height;
-          if (p.y > canvas.height) p.y = 0;
-        });
-      }
-
-      function loop() {
-        if (!isVisible) return;
-        update();
-        draw();
-        animId = requestAnimationFrame(loop);
-      }
-
-      const visObs = new IntersectionObserver(([e]) => {
-        isVisible = e.isIntersecting;
-        if (isVisible) loop();
-        else cancelAnimationFrame(animId);
-      }, { threshold: 0 });
-      visObs.observe(heroWrap);
-
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(resize, 200);
       });
-      resize();
-      loop();
     })();
 
-    // ── Mouse-tracking radial glow ────────────
-    (function() {
-      const heroWrap = document.querySelector('.hero-wrap');
-      heroWrap.addEventListener('mousemove', e => {
-        const rect = heroWrap.getBoundingClientRect();
-        heroWrap.style.setProperty('--glow-x', ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%');
-        heroWrap.style.setProperty('--glow-y', ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%');
-      });
-      if ('ontouchstart' in window) {
-        let angle = 0;
-        function drift() {
-          angle += 0.008;
-          heroWrap.style.setProperty('--glow-x', (50 + 20 * Math.sin(angle)) + '%');
-          heroWrap.style.setProperty('--glow-y', (40 + 15 * Math.cos(angle * 0.7)) + '%');
-          requestAnimationFrame(drift);
+    // ── Smooth details open/close ───────────────
+    document.querySelectorAll('.feature-item').forEach(details => {
+      const body = details.querySelector('.feature-item-body');
+      let animating = false;
+
+      details.addEventListener('click', e => {
+        if (e.target.closest('.feature-item-body') || animating) return;
+        e.preventDefault();
+
+        var lis = body.querySelectorAll('li');
+
+        if (details.open) {
+          // collapse — remove ticks instantly
+          animating = true;
+          lis.forEach(li => li.classList.remove('ticked'));
+          body.style.gridTemplateRows = '0fr';
+          body.style.paddingBottom = '0';
+          body.addEventListener('transitionend', function handler() {
+            details.open = false;
+            animating = false;
+            body.style.gridTemplateRows = '';
+            body.style.paddingBottom = '';
+            body.removeEventListener('transitionend', handler);
+          }, { once: true });
+        } else {
+          // expand: set open but force 0fr first, then animate to 1fr
+          animating = true;
+          lis.forEach(li => li.classList.remove('ticked'));
+          body.style.gridTemplateRows = '0fr';
+          body.style.paddingBottom = '0';
+          details.open = true;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              body.style.gridTemplateRows = '1fr';
+              body.style.paddingBottom = '1.25rem';
+              // Stagger ticks one by one with spark particles
+              var sparkColors = ['#fbbf24','#f59e0b','#fcd34d','#fde68a'];
+              lis.forEach((li, idx) => {
+                setTimeout(() => {
+                  li.classList.add('ticked');
+                  // Spawn spark particles from tick position (relative to li)
+                  for (var p = 0; p < 8; p++) {
+                    var spark = document.createElement('span');
+                    spark.className = 'icon-particle';
+                    var angle = (Math.PI * 2 / 8) * p + (Math.random() - 0.5) * 0.6;
+                    var dist = 15 + Math.random() * 20;
+                    var sz = 2 + Math.random() * 2;
+                    spark.style.width = sz + 'px';
+                    spark.style.height = sz + 'px';
+                    spark.style.left = '6px';
+                    spark.style.top = '8px';
+                    spark.style.background = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+                    spark.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                    spark.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+                    li.appendChild(spark);
+                  }
+                  setTimeout(() => {
+                    li.querySelectorAll('.icon-particle').forEach(sp => sp.remove());
+                  }, 650);
+                }, 120 + idx * 80);
+              });
+              body.addEventListener('transitionend', function handler() {
+                animating = false;
+                body.style.gridTemplateRows = '';
+                body.style.paddingBottom = '';
+                body.removeEventListener('transitionend', handler);
+              }, { once: true });
+            });
+          });
         }
-        drift();
+      });
+    });
+
+    // ── Tornado orbit animation ──────────────────
+    (function() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const container = document.querySelector('.tornado-container');
+      const icons = document.querySelectorAll('.fg-icon');
+      const count = icons.length;
+
+      const layers = [
+        { rx: 12,  ry: 5,   cy: 90,  speed: 0.0011,  tilt: 15 },
+        { rx: 40,  ry: 16,  cy: 65,  speed: 0.00095, tilt: 12 },
+        { rx: 75,  ry: 28,  cy: 40,  speed: 0.0008,  tilt: 9 },
+        { rx: 110, ry: 38,  cy: 15,  speed: 0.00068, tilt: 7 },
+        { rx: 145, ry: 48,  cy: -10, speed: 0.00057, tilt: 5 },
+        { rx: 175, ry: 55,  cy: -30, speed: 0.00048, tilt: 4 },
+        { rx: 205, ry: 60,  cy: -55, speed: 0.00042, tilt: 3 },
+        { rx: 235, ry: 65,  cy: -80, speed: 0.00037, tilt: 2 },
+        { rx: 270, ry: 70,  cy: -105,speed: 0.00032, tilt: 1 }
+      ];
+
+      // Golden angle (~137.5°) ensures icons are maximally spread at all times
+      var golden = Math.PI * (3 - Math.sqrt(5));
+      var phaseOffsets = [];
+      for (var i = 0; i < count; i++) phaseOffsets.push(i * golden);
+
+      // ── Wind streaks (SVG splines) ────────────
+      var svgNS = 'http://www.w3.org/2000/svg';
+      var streaksSvg = container.querySelector('.tornado-streaks');
+      // Use container rect for center — icons use left:50%/top:50% which is container center
+      function getCenter() {
+        var r = container.getBoundingClientRect();
+        return { w: r.width, h: r.height, ox: r.width / 2, oy: r.height / 2 };
       }
+      function syncSvg() {
+        dim = getCenter();
+        ox = dim.ox; oy = dim.oy;
+        streaksSvg.setAttribute('width', dim.w);
+        streaksSvg.setAttribute('height', dim.h);
+        streaksSvg.setAttribute('viewBox', '0 0 ' + dim.w + ' ' + dim.h);
+      }
+      var dim = getCenter();
+      var ox = dim.ox, oy = dim.oy;
+      syncSvg();
+      window.addEventListener('resize', syncSvg);
+      // Re-sync after layout settles (fonts, images may shift dimensions)
+      requestAnimationFrame(function() { requestAnimationFrame(syncSvg); });
+      window.addEventListener('load', syncSvg);
+      var streaks = [];
+      var maxStreaks = 30;
+
+      // Sample a point on the orbit ellipse — same center as icon CSS (left:50%, top:50%)
+      function orbitPt(L, angle) {
+        return { x: Math.cos(angle) * L.rx + ox, y: Math.sin(angle) * L.ry + L.cy + oy };
+      }
+
+      function spawnStreak(time) {
+        var path = document.createElementNS(svgNS, 'path');
+        streaksSvg.appendChild(path);
+        var li = Math.floor(Math.random() * count);
+        var base = layers[li];
+        var rScale = 0.2 + Math.random() * 1.0;
+        var L = { rx: base.rx * rScale, ry: base.ry * rScale, cy: base.cy * rScale, speed: base.speed * (0.8 + Math.random() * 0.4) };
+        var startAngle = time * L.speed + phaseOffsets[li] + (Math.random() - 0.5) * 2;
+        var arcSpan = (0.4 + Math.random() * 0.8); // radians of arc the streak covers
+        var sw = 1 + Math.random() * 2; // stroke width 1-3
+        var life = 600 + Math.random() * 700;
+        path.setAttribute('stroke-width', sw);
+        return { el: path, startAngle: startAngle, arcSpan: arcSpan, L: L, li: li, sw: sw, birth: time, life: life };
+      }
+
+      var lastStreakSpawn = 0;
+
+      function animate(time) {
+        // Update icons
+        icons.forEach(function(icon, i) {
+          var L = layers[i];
+          var angle = time * L.speed + phaseOffsets[i];
+          var x = Math.cos(angle) * L.rx;
+          var y = Math.sin(angle) * L.ry + L.cy;
+          var depth = Math.sin(angle);
+          var s = 0.85 + depth * 0.15;
+          var o = 0.45 + depth * 0.55;
+          var blur = (1 - depth) * 1.25;
+          var rot = depth * L.tilt;
+          icon.style.transform = 'translate(calc(-50% + ' + x.toFixed(1) + 'px), calc(-50% + ' + y.toFixed(1) + 'px)) scale(' + s.toFixed(3) + ') rotate(' + rot.toFixed(1) + 'deg)';
+          icon.style.opacity = o.toFixed(2);
+          icon.style.filter = 'blur(' + blur.toFixed(1) + 'px)';
+          icon.style.zIndex = depth > 0 ? 3 : 1;
+        });
+
+        // Spawn wind streaks
+        if (time - lastStreakSpawn > 60 && streaks.length < maxStreaks) {
+          streaks.push(spawnStreak(time));
+          lastStreakSpawn = time;
+        }
+
+        // Update wind streaks — build cubic bezier spline along orbit arc
+        for (var si = streaks.length - 1; si >= 0; si--) {
+          var st = streaks[si];
+          var age = time - st.birth;
+          var t = age / st.life;
+          if (t >= 1) {
+            st.el.remove();
+            streaks.splice(si, 1);
+            continue;
+          }
+          var L = st.L;
+          // Current leading angle advances over lifetime
+          var lead = st.startAngle + t * L.speed * st.life * 3;
+          // Sample 5 points along the arc for a smooth cubic spline
+          var pts = [];
+          for (var pi = 0; pi < 5; pi++) {
+            var a = lead - st.arcSpan * (pi / 4);
+            pts.push(orbitPt(L, a));
+          }
+          // Build SVG path: M start C (cubic segments via catmull-rom to bezier)
+          var d = 'M' + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(1);
+          for (var j = 0; j < pts.length - 1; j++) {
+            var p0 = pts[Math.max(j - 1, 0)];
+            var p1 = pts[j];
+            var p2 = pts[Math.min(j + 1, pts.length - 1)];
+            var p3 = pts[Math.min(j + 2, pts.length - 1)];
+            var cp1x = p1.x + (p2.x - p0.x) / 6;
+            var cp1y = p1.y + (p2.y - p0.y) / 6;
+            var cp2x = p2.x - (p3.x - p1.x) / 6;
+            var cp2y = p2.y - (p3.y - p1.y) / 6;
+            d += ' C' + cp1x.toFixed(1) + ',' + cp1y.toFixed(1) + ' ' + cp2x.toFixed(1) + ',' + cp2y.toFixed(1) + ' ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1);
+          }
+          st.el.setAttribute('d', d);
+          // Fade in then out
+          var so = t < 0.15 ? t / 0.15 : (1 - t) / 0.85;
+          so *= 0.85;
+          var midAngle = lead - st.arcSpan * 0.5;
+          var depth = Math.sin(midAngle);
+          // Color: brighter in front, dimmer in back
+          var alpha = (0.4 + depth * 0.4) * so;
+          st.el.setAttribute('stroke', 'rgba(255,255,255,' + alpha.toFixed(2) + ')');
+          st.el.setAttribute('opacity', so.toFixed(2));
+        }
+
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    })();
+
+    // ── Foreground icon bounce on click ─────────
+    (function() {
+      const fgIcons = document.querySelectorAll('.fg-icon');
+      const clicked = new Set();
+      let confettiFired = false;
+
+      fgIcons.forEach(icon => {
+        icon.addEventListener('click', () => {
+          icon.classList.remove('bounce');
+          void icon.offsetWidth;
+          icon.classList.add('bounce');
+
+          clicked.add(icon);
+
+          if (clicked.size >= fgIcons.length && !confettiFired) {
+            confettiFired = true;
+            var duration = 4 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+            function randomInRange(min, max) {
+              return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+              var timeLeft = animationEnd - Date.now();
+              if (timeLeft <= 0) return clearInterval(interval);
+              var particleCount = 50 * (timeLeft / duration);
+              confetti(Object.assign({}, defaults, { particleCount: particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+              confetti(Object.assign({}, defaults, { particleCount: particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+          }
+        });
+        icon.addEventListener('animationend', () => icon.classList.remove('bounce'));
+      });
     })();
 
     // ── SVG stroke-draw on scroll ─────────────
