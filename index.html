@@ -23,9 +23,10 @@
       --text: #f5f5f5;
       --text-secondary: #a3a3a3;
       --text-muted: #636363;
-      --accent: #a78bfa;
-      --accent-hover: #8b5cf6;
-      --accent-glow: rgba(139, 92, 246, 0.12);
+      --accent: #6b25dd;
+      --accent-light: #a78bfa;
+      --accent-hover: #5a1ec0;
+      --accent-glow: rgba(107, 37, 221, 0.12);
       --border: #262626;
       --radius: 14px;
     }
@@ -71,7 +72,7 @@
       color: var(--text);
       text-decoration: none;
     }
-    .logo span { color: var(--accent); font-size: 0.75em; margin-left: 4px; vertical-align: super; }
+    .logo span { color: var(--accent-light); font-size: 0.75em; margin-left: 4px; vertical-align: super; }
     .nav-links { display: flex; gap: 2rem; align-items: center; }
     .nav-links a {
       color: var(--text-secondary);
@@ -91,7 +92,7 @@
       text-decoration: none;
       transition: background 0.2s, transform 0.15s;
     }
-    .btn-nav:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-nav { border: 2px solid var(--accent); }
 
     /* ── SECTIONS ──────────────────────────────── */
     .section {
@@ -104,7 +105,7 @@
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.1em;
-      color: var(--accent);
+      color: var(--accent-light);
       margin-bottom: 1rem;
     }
     .section-title {
@@ -133,7 +134,7 @@
       width: 40px;
     }
     .floating-icon svg {
-      fill: var(--accent);
+      fill: var(--accent-light);
     }
     .fi-1  { top: 6%;  left: 4%;  transform: rotate(-15deg); }
     .fi-2  { top: 14%; right: 6%; transform: rotate(25deg); }
@@ -250,9 +251,9 @@
     }
     .hero-pill {
       display: inline-block;
-      background: rgba(139,92,246,0.12);
-      border: 1px solid rgba(139,92,246,0.25);
-      color: var(--accent);
+      background: rgba(107,37,221,0.12);
+      border: 1px solid rgba(107,37,221,0.25);
+      color: var(--accent-light);
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -275,7 +276,7 @@
     }
     .hero h1 em {
       font-style: normal;
-      background: linear-gradient(135deg, var(--accent) 0%, #c4b5fd 50%, var(--accent-hover) 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, #9b6bef 50%, var(--accent-hover) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -310,8 +311,8 @@
     .btn-primary {
       background: var(--accent);
       color: #fff;
+      border: 2px solid var(--accent);
     }
-    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,92,246,0.3); }
     .btn-primary::after {
       content: '';
       position: absolute;
@@ -322,6 +323,23 @@
       transition: transform 0.5s;
     }
     .btn-primary:hover::after { transform: translateX(100%); }
+    @keyframes rainbow {
+      0%   { background-color: rgb(107, 37, 221); border-color: rgb(107, 37, 221); }
+      33%  { background-color: rgb(36, 164, 164); border-color: rgb(36, 164, 164); }
+      66%  { background-color: rgb(204, 86, 178); border-color: rgb(204, 86, 178); }
+      100% { background-color: rgb(107, 37, 221); border-color: rgb(107, 37, 221); }
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover, .btn-primary:focus {
+        animation: rainbow 5s linear infinite;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(107,37,221,0.3);
+      }
+      .btn-nav:hover, .btn-nav:focus {
+        animation: rainbow 5s linear infinite;
+        transform: translateY(-1px);
+      }
+    }
     .btn-ghost {
       background: transparent;
       color: var(--text);
@@ -351,7 +369,7 @@
       letter-spacing: 0.02em;
     }
     .file-wo6 { color: #9ca3af; }
-    .file-wo7 { color: var(--accent); }
+    .file-wo7 { color: var(--accent-light); }
     .file-img {
       width: 64px;
       height: 64px;
@@ -426,7 +444,7 @@
     .phase-icon svg {
       width: 100%;
       height: 100%;
-      fill: var(--accent);
+      fill: var(--accent-light);
       opacity: 0.6;
       transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -479,7 +497,7 @@
     .feature-item[open] summary::after {
       content: '\2212';
     }
-    .feature-item summary:hover { color: var(--accent); }
+    .feature-item summary:hover { color: var(--accent-light); }
     .feature-item-body {
       display: grid;
       grid-template-rows: 0fr;
@@ -568,7 +586,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--accent-light);
     }
 
     /* ── TRANSFORM VISUAL ──────────────────────── */
@@ -593,7 +611,7 @@
       letter-spacing: 0.08em;
     }
     .transform-header .col-old { color: var(--text-muted); }
-    .transform-header .col-new { color: var(--accent); }
+    .transform-header .col-new { color: var(--accent-light); }
     .transform-rows { padding: 1.5rem; }
     .transform-row {
       display: flex;
@@ -618,7 +636,7 @@
     .transform-row .t-arrow {
       flex: 0 0 40px;
       text-align: center;
-      color: var(--accent);
+      color: var(--accent-light);
       font-weight: 600;
     }
     .transform-row .t-new {
@@ -729,7 +747,7 @@
       color: var(--text);
       margin-bottom: 0.5rem;
     }
-    footer .footer-brand span { color: var(--accent); }
+    footer .footer-brand span { color: var(--accent-light); }
     footer .footer-sub { margin-bottom: 1.5rem; }
     footer .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; }
     footer .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; font-weight: 400; }
@@ -762,11 +780,11 @@
     }
     .highlight-item:hover .highlight-icon svg {
       transform: scale(1.15) rotate(-3deg);
-      filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.4));
+      filter: drop-shadow(0 0 12px rgba(107, 37, 221, 0.4));
     }
     .highlight-item:hover .highlight-icon svg path,
     .highlight-item:hover .highlight-icon svg circle {
-      stroke: var(--accent);
+      stroke: var(--accent-light);
     }
     .highlight-item {
       position: relative;
@@ -903,7 +921,7 @@
     <div class="section-header fade-in">
 
       <h2 class="section-title">Five Steps. One Click.</h2>
-      <p class="section-subtitle">Open your .watch file and the importer takes care of everything&thinsp;&mdash;&thinsp;from reading your legacy show to delivering a complete summary of what was brought over.</p>
+      <p class="section-subtitle">Open your .watch file and the importer takes care of everything - from reading your legacy show to delivering a complete summary of what was brought over.</p>
     </div>
     <div class="pipeline-grid">
       <div class="phase-card fade-in" style="transition-delay:0s">
@@ -916,7 +934,7 @@
         <div class="phase-num">02</div>
         <div class="phase-icon pi-analyze"><svg viewBox="0 0 24 24"><path d="M17,22V20H20V17H22V20.5C22,20.89 21.84,21.24 21.54,21.54C21.24,21.84 20.89,22 20.5,22H17M7,22H3.5C3.11,22 2.76,21.84 2.46,21.54C2.16,21.24 2,20.89 2,20.5V17H4V20H7V22M17,2H20.5C20.89,2 21.24,2.16 21.54,2.46C21.84,2.76 22,3.11 22,3.5V7H20V4H17V2M7,2V4H4V7H2V3.5C2,3.11 2.16,2.76 2.46,2.46C2.76,2.16 3.11,2 3.5,2H7M10.5,6C13,6 15,8 15,10.5C15,11.38 14.75,12.21 14.31,12.9L17.57,16.16L16.16,17.57L12.9,14.31C12.21,14.75 11.38,15 10.5,15C8,15 6,13 6,10.5C6,8 8,6 10.5,6M10.5,8C9.12,8 8,9.12 8,10.5C8,11.88 9.12,13 10.5,13C11.88,13 13,11.88 13,10.5C13,9.12 11.88,8 10.5,8Z"/></svg></div>
         <h3>Analyze</h3>
-        <p>Every element of your show is identified&thinsp;&mdash;&thinsp;media, timelines, cues, displays, and settings&thinsp;&mdash;&thinsp;including shows from all WATCHOUT 6 versions.</p>
+        <p>Every element of your show is identified - media, timelines, cues, displays, and settings - including shows from all WATCHOUT 6 versions.</p>
       </div>
       <div class="phase-card fade-in" style="transition-delay:0.16s">
         <div class="phase-num">03</div>
@@ -944,7 +962,7 @@
     <div class="section-header fade-in">
 
       <h2 class="section-title">Comprehensive Coverage</h2>
-      <p class="section-subtitle">From still images to 3D models, from simple fades to complex motion paths&thinsp;&mdash;&thinsp;the importer brings across the full breadth of your WATCHOUT&nbsp;6 show.</p>
+      <p class="section-subtitle">From still images to 3D models, from simple fades to complex motion paths - the importer brings across the full breadth of your WATCHOUT&nbsp;6 show.</p>
     </div>
     <div class="feature-list">
 
@@ -1192,7 +1210,7 @@
             <span class="url">Import Report</span>
           </div>
           <div class="report-body">
-            <div class="rpt-heading">Import Report &mdash; ConcertShow.watch</div>
+            <div class="rpt-heading">Import Report - ConcertShow.watch</div>
             <div class="rpt-meta">WATCHOUT 6.5.1 &ensp;|&ensp; Imported Nov 20, 2024</div>
             <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 8 timelines imported</div>
             <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 412 cues imported</div>
@@ -1200,8 +1218,8 @@
             <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 6 displays configured</div>
             <div class="rpt-line"><span class="rpt-stat">&#10003;</span> 14 variables mapped</div>
             <br>
-            <div class="rpt-line"><span class="rpt-warn">&#9888;</span> Serial output on "Main" at 00:15 &mdash; not available in WO7</div>
-            <div class="rpt-line"><span class="rpt-warn">&#9888;</span> DMX playback on "Effects" at 01:30 &mdash; not available in WO7</div>
+            <div class="rpt-line"><span class="rpt-warn">&#9888;</span> Serial output on "Main" at 00:15 - not available in WO7</div>
+            <div class="rpt-line"><span class="rpt-warn">&#9888;</span> DMX playback on "Effects" at 01:30 - not available in WO7</div>
             <div class="rpt-line"><span class="rpt-err">&#10007;</span> Missing file: media/intro_loop.mov</div>
           </div>
         </div>
@@ -1215,7 +1233,7 @@
       <h2 class="section-title" style="text-align:center;">Ready to Move Forward?</h2>
       <p class="section-subtitle" style="text-align:center; margin: 0 auto 3rem;">Take the next step — explore what's new or upgrade today.</p>
       <div class="cta-buttons">
-        <a href="#" class="btn-primary btn-cta">Upgrade Your Key to WATCHOUT 7</a>
+        <a href="#" class="btn-primary btn-cta">Upgrade Your License to WATCHOUT 7</a>
         <a href="#" class="btn-ghost btn-cta">Learn More About 7.8 Changes</a>
       </div>
     </div>
