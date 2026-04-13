@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's New - Dark</title>
+  <style>
+    :root {
+      --page-top: #070709;
+      --page-bottom: #121219;
+      --shell: #111117;
+      --shell-raised: #171720;
+      --panel: #181821;
+      --panel-strong: #1e1e28;
+      --panel-soft: #14141b;
+      --panel-hover: #21212c;
+      --border: #2b2933;
+      --border-strong: #3b3745;
+      --line: rgba(255, 255, 255, 0.06);
+      --text: #f1eef8;
+      --muted: #a09aae;
+      --muted-strong: #c6bfd3;
+      --accent: #d05bb5;
+      --accent-strong: #8b53bf;
+      --accent-soft: rgba(208, 91, 181, 0.14);
+      --accent-line: rgba(208, 91, 181, 0.45);
+      --cyan: #5bc7f6;
+      --green: #74d08e;
+      --orange: #df9561;
+      --shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      overflow: hidden;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(208, 91, 181, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(91, 199, 246, 0.08), transparent 26%),
+        linear-gradient(180deg, var(--page-top) 0%, var(--page-bottom) 100%);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
+    }
+
+    body::after {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 18%);
+    }
+
+    .panel {
+      width: min(1120px, 100%);
+      min-height: min(960px, calc(100vh - 44px));
+      background: linear-gradient(180deg, rgba(26, 26, 34, 0.96) 0%, rgba(14, 14, 19, 0.98) 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .panel-inner {
+      padding: 38px 38px 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-height: 0;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 0.96rem;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .panel-title {
+      font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(208, 91, 181, 0.16), transparent 28%),
+        linear-gradient(135deg, rgba(25, 25, 33, 0.95) 0%, rgba(14, 14, 19, 0.98) 75%);
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 44%);
+      pointer-events: none;
+    }
+
+    .hero-panel:hover {
+      border-color: var(--border-strong);
+      background:
+        radial-gradient(circle at top right, rgba(208, 91, 181, 0.2), transparent 28%),
+        linear-gradient(135deg, rgba(28, 28, 37, 0.98) 0%, rgba(16, 16, 22, 1) 75%);
+    }
+
+    .hero-panel.active {
+      border-color: var(--accent-line);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(208, 91, 181, 0.12);
+      transform: translateX(2px);
+    }
+
+    .hero-label {
+      color: #877f93;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      justify-self: end;
+      align-self: start;
+    }
+
+    .hero-head {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title-wrap {
+      min-width: 0;
+    }
+
+    .hero-icon {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(180deg, #1b1b24, #101017);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-icon::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 75%, rgba(91, 199, 246, 0.12), transparent 46%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 50%);
+      pointer-events: none;
+    }
+
+    .opt-mini {
+      position: relative;
+      display: flex;
+      gap: 6px;
+      align-items: flex-end;
+      padding-bottom: 2px;
+    }
+
+    .opt-mini-bar {
+      width: 8px;
+      border-radius: 3px 3px 0 0;
+      background: rgba(91, 199, 246, 0.6);
+      box-shadow: 0 0 10px rgba(91, 199, 246, 0.18);
+    }
+
+    .opt-mini-bar:nth-child(1) { height: 18px; }
+    .opt-mini-bar:nth-child(2) { height: 30px; background: #6fd4ff; }
+    .opt-mini-bar:nth-child(3) { height: 22px; }
+    .opt-mini-bar:nth-child(4) { height: 38px; background: var(--accent); box-shadow: 0 0 14px rgba(208, 91, 181, 0.28); }
+    .opt-mini-bar:nth-child(5) { height: 26px; }
+
+    .hero-title {
+      font-size: clamp(1.95rem, 3vw, 2.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-copy {
+      max-width: 840px;
+      font-size: 1rem;
+      line-height: 1.74;
+      color: var(--muted-strong);
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(270px, 330px) minmax(0, 1fr);
+      gap: 22px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .feature-tab {
+      width: 100%;
+      display: block;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(25, 25, 33, 0.92), rgba(18, 18, 24, 0.96));
+      text-align: left;
+      color: var(--muted-strong);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .feature-tab:hover {
+      border-color: var(--border-strong);
+      background: linear-gradient(180deg, rgba(29, 29, 38, 0.98), rgba(20, 20, 27, 1));
+    }
+
+    .feature-tab.active {
+      border-color: var(--accent-line);
+      background:
+        linear-gradient(180deg, rgba(34, 29, 38, 0.98), rgba(22, 20, 28, 1));
+      box-shadow: inset 0 0 0 1px rgba(208, 91, 181, 0.1), 0 16px 30px rgba(0, 0, 0, 0.22);
+      transform: translateX(2px);
+    }
+
+    .feature-tab-head {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      align-items: center;
+      gap: 14px;
+    }
+
+    .feature-tab-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .feature-tab-icon.icon-stage {
+      background: linear-gradient(180deg, rgba(116, 208, 142, 0.14), rgba(116, 208, 142, 0.04));
+    }
+
+    .stage-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    .stage-mini-cell {
+      width: 14px;
+      height: 10px;
+      border-radius: 3px;
+      border: 1.5px solid rgba(116, 208, 142, 0.45);
+      background: rgba(255, 255, 255, 0.04);
+      position: relative;
+    }
+
+    .stage-mini-cell::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(116, 208, 142, 0.45);
+    }
+
+    .feature-tab-icon.icon-speed-vis {
+      background: linear-gradient(180deg, rgba(208, 91, 181, 0.14), rgba(139, 83, 191, 0.08));
+    }
+
+    .speed-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+    }
+
+    .speed-mini-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .speed-mini-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 52%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #f08bd5);
+      border-radius: 3px;
+    }
+
+    .speed-mini-thumb {
+      position: absolute;
+      top: 50%;
+      left: 52%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: #f4d8eb;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(208, 91, 181, 0.45);
+    }
+
+    .speed-mini-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.48rem;
+      font-weight: 700;
+      color: #a79fb7;
+      font-family: ui-sans-serif, sans-serif;
+    }
+
+    .feature-tab-icon.icon-keyfill {
+      background: linear-gradient(180deg, rgba(223, 149, 97, 0.16), rgba(223, 149, 97, 0.04));
+    }
+
+    .kf-mini {
+      position: relative;
+      width: 26px;
+      height: 26px;
+    }
+
+    .kf-mini-layer {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1.5px solid rgba(223, 149, 97, 0.32);
+    }
+
+    .kf-mini-layer:nth-child(1) {
+      background: rgba(223, 149, 97, 0.08);
+      transform: rotate(-8deg) translate(-3px, 1px);
+    }
+
+    .kf-mini-layer:nth-child(2) {
+      background: rgba(223, 149, 97, 0.14);
+      top: 3px;
+      left: 3px;
+    }
+
+    .kf-mini-layer:nth-child(3) {
+      background: rgba(223, 149, 97, 0.22);
+      transform: rotate(8deg) translate(6px, 5px);
+    }
+
+    .feature-tab-title {
+      display: block;
+      font-size: 1.03rem;
+      line-height: 1.28;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .feature-tab-description {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.93rem;
+      line-height: 1.58;
+      color: var(--muted);
+    }
+
+    .feature-tab.active .feature-tab-description {
+      display: block;
+    }
+
+    .screenshot-placeholder {
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      border: 1px dashed rgba(208, 91, 181, 0.28);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(24, 24, 33, 0.92), rgba(11, 11, 16, 0.98)),
+        radial-gradient(circle at top right, rgba(208, 91, 181, 0.08), transparent 30%);
+      color: #9d93ae;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-align: center;
+      padding: 24px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      border-top: 1px solid var(--line);
+      background: rgba(9, 9, 13, 0.72);
+      color: #8f879d;
+      font-size: 0.92rem;
+    }
+
+    .footer a {
+      color: #d6c6e6;
+      text-decoration: none;
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .skip,
+    .next {
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+    }
+
+    .skip {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+
+    .skip:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .next {
+      padding: 10px 18px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 10px 24px rgba(208, 91, 181, 0.24);
+    }
+
+    .next:hover,
+    .skip:hover {
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 980px) {
+      body {
+        padding: 14px;
+      }
+
+      .panel {
+        min-height: auto;
+      }
+
+      .panel-inner {
+        padding: 26px 22px 22px;
+      }
+
+      .content-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .screenshot-placeholder {
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-head {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .hero-label {
+        justify-self: start;
+      }
+
+      .footer-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="panel" aria-label="What's new panel dark version">
+    <div class="panel-inner">
+      <div>
+        <p class="eyebrow">What's new in WATCHOUT</p>
+        <h1 class="panel-title">Product updates</h1>
+      </div>
+
+      <section class="hero-panel active" aria-label="Featured release" data-title="The New Optimizer" data-preview="optimizer" data-caption="Major release focus" role="button" tabindex="0">
+        <div class="hero-head">
+          <div class="hero-icon" aria-hidden="true">
+            <div class="opt-mini">
+              <div class="opt-mini-bar"></div>
+              <div class="opt-mini-bar"></div>
+              <div class="opt-mini-bar"></div>
+              <div class="opt-mini-bar"></div>
+              <div class="opt-mini-bar"></div>
+            </div>
+          </div>
+          <div class="hero-title-wrap">
+            <h2 class="hero-title">The New Optimizer</h2>
+          </div>
+          <span class="hero-label">Release 2026.4</span>
+        </div>
+
+        <p class="hero-copy">
+          A ground-up redesign of the Optimizer brings faster processing, smarter re-optimization workflows, and broader format support. The new engine introduces a "Create Version" workflow that lets you re-optimize existing content with a new output codec without touching the original. Audio handling now supports up to 65,535 channels via .wav files, and corrected color interpretation keeps output faithful across the pipeline.
+        </p>
+      </section>
+
+      <section class="content-shell" aria-label="Release details">
+        <div class="feature-list" role="tablist" aria-label="Release items">
+          <button class="feature-tab minor active" type="button" role="tab" aria-selected="true" data-index="0" data-title="Pixel-Perfect Stage Positioning" data-preview="stage" data-caption="Stage precision preview" data-description="Cues and 2D displays can now be positioned with sub-pixel precision on the stage, giving operators finer control over layout accuracy in complex multi-display setups.">
+            <span class="feature-tab-head">
+              <span class="feature-tab-icon icon-stage" aria-hidden="true">
+                <div class="stage-mini">
+                  <div class="stage-mini-cell"></div>
+                  <div class="stage-mini-cell"></div>
+                  <div class="stage-mini-cell"></div>
+                  <div class="stage-mini-cell"></div>
+                </div>
+              </span>
+              <span class="feature-tab-title">Pixel-Perfect Stage Positioning</span>
+            </span>
+            <span class="feature-tab-description">Cues and 2D displays can now be positioned with sub-pixel precision on the stage, giving operators finer control over layout accuracy in complex multi-display setups.</span>
+          </button>
+
+          <button class="feature-tab minor" type="button" role="tab" aria-selected="false" data-index="1" data-title="Adjustable Video &amp; Audio Speed" data-preview="speed" data-caption="Playback speed overlay" data-description="New playback speed controls let you slow down or speed up video and audio independently, opening up creative timing possibilities without requiring re-encoded assets.">
+            <span class="feature-tab-head">
+              <span class="feature-tab-icon icon-speed-vis" aria-hidden="true">
+                <div class="speed-mini">
+                  <div class="speed-mini-track">
+                    <div class="speed-mini-fill"></div>
+                    <div class="speed-mini-thumb"></div>
+                  </div>
+                  <div class="speed-mini-labels"><span>0.5x</span><span>2x</span></div>
+                </div>
+              </span>
+              <span class="feature-tab-title">Adjustable Video &amp; Audio Speed</span>
+            </span>
+            <span class="feature-tab-description">New playback speed controls let you slow down or speed up video and audio independently, opening up creative timing possibilities without requiring re-encoded assets.</span>
+          </button>
+
+          <button class="feature-tab minor" type="button" role="tab" aria-selected="false" data-index="2" data-title="Multi-Channel Key and Fill" data-preview="keyfill" data-caption="Layer routing preview" data-description="Key and fill signals can now be routed across multiple channels simultaneously, streamlining high-channel-count compositing setups and reducing manual configuration overhead.">
+            <span class="feature-tab-head">
+              <span class="feature-tab-icon icon-keyfill" aria-hidden="true">
+                <div class="kf-mini">
+                  <div class="kf-mini-layer"></div>
+                  <div class="kf-mini-layer"></div>
+                  <div class="kf-mini-layer"></div>
+                </div>
+              </span>
+              <span class="feature-tab-title">Multi-Channel Key and Fill</span>
+            </span>
+            <span class="feature-tab-description">Key and fill signals can now be routed across multiple channels simultaneously, streamlining high-channel-count compositing setups and reducing manual configuration overhead.</span>
+          </button>
+        </div>
+
+        <div class="screenshot-placeholder" id="screenshot-placeholder" aria-live="polite">Screenshot placeholder for Pixel-Perfect Stage Positioning</div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <a href="#">Learn more at dataton.com/releases</a>
+      <div class="footer-actions">
+        <button class="skip" type="button">Skip all</button>
+        <button class="next" type="button">Next</button>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const heroPanel = document.querySelector('.hero-panel');
+    const tabs = Array.from(document.querySelectorAll('.feature-tab'));
+    const nextButton = document.querySelector('.next');
+    const screenshotPlaceholder = document.getElementById('screenshot-placeholder');
+    const items = [heroPanel, ...tabs];
+
+    let activeIndex = 1;
+
+    function renderFeature(index) {
+      items.forEach((item, itemIndex) => {
+        const isActive = itemIndex === index;
+        item.classList.toggle('active', isActive);
+        if (item.classList.contains('feature-tab')) {
+          item.setAttribute('aria-selected', String(isActive));
+        }
+      });
+
+      activeIndex = index;
+
+      const selected = items[index];
+      screenshotPlaceholder.textContent = `Screenshot placeholder for ${selected.dataset.title}`;
+      nextButton.textContent = activeIndex === items.length - 1 ? 'Got it' : 'Next';
+    }
+
+    heroPanel.addEventListener('click', () => renderFeature(0));
+    heroPanel.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        renderFeature(0);
+      }
+    });
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => renderFeature(index + 1));
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (activeIndex < items.length - 1) {
+        renderFeature(activeIndex + 1);
+      }
+    });
+
+    renderFeature(1);
+  </script>
+</body>
+
+</html>

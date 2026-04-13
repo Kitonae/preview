@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's New — April 1, 2026</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      padding: 72px 48px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .release-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .page-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #111827;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .page-header .subtitle {
+      color: #6b7280;
+      font-size: 1.05rem;
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    .divider {
+      max-width: 900px;
+      margin: 36px auto 0;
+      border: none;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* ── Outer page layout ── */
+    .page-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px 120px;
+    }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .tag-new {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .tag-improved {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .tag-audio {
+      background: #fdf4ff;
+      color: #9333ea;
+    }
+
+    .tag-performance {
+      background: #fff7ed;
+      color: #ea580c;
+    }
+
+    .tag-display {
+      background: #f0f9ff;
+      color: #0284c7;
+    }
+
+    .tag-hardware {
+      background: #fefce8;
+      color: #ca8a04;
+    }
+
+    .tag-developer {
+      background: #f8fafc;
+      color: #64748b;
+    }
+
+    .tag-docs {
+      background: #fdf2f8;
+      color: #be185d;
+    }
+
+    .tag-network {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    /* ════════════════════════════════════════
+       OPTIMIZER HERO SECTION
+    ════════════════════════════════════════ */
+    .hero-section {
+      padding: 60px 0 52px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .hero-visual {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%);
+      border-radius: 16px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 25% 65%, rgba(56, 189, 248, 0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 25%, rgba(139, 92, 246, 0.15) 0%, transparent 60%);
+    }
+
+    .opt-ui {
+      position: relative;
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .opt-bar {
+      width: 34px;
+      border-radius: 6px 6px 0 0;
+      background: rgba(56, 189, 248, 0.65);
+    }
+
+    .opt-bar:nth-child(1) {
+      height: 80px;
+    }
+
+    .opt-bar:nth-child(2) {
+      height: 130px;
+      background: rgba(99, 179, 237, 0.9);
+    }
+
+    .opt-bar:nth-child(3) {
+      height: 100px;
+    }
+
+    .opt-bar:nth-child(4) {
+      height: 165px;
+      background: #38bdf8;
+    }
+
+    .opt-bar:nth-child(5) {
+      height: 90px;
+    }
+
+    .opt-bar:nth-child(6) {
+      height: 140px;
+      background: rgba(56, 189, 248, 0.85);
+    }
+
+    .hero-label {
+      position: absolute;
+      top: 22px;
+      left: 24px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      background: rgba(56, 189, 248, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .hero-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #111827;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .hero-section>p {
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 10px;
+    }
+
+    /* Optimizer sub-feature grid */
+    .opt-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .opt-sub-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .opt-sub-card h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .opt-sub-card p {
+      font-size: 0.82rem;
+      color: #6b7280;
+      line-height: 1.55;
+    }
+
+    /* ════════════════════════════════════════
+       GROUPED SECTIONS (below hero)
+    ════════════════════════════════════════ */
+    .group-section {
+      padding: 52px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .group-section:last-child {
+      border-bottom: none;
+    }
+
+    /* Section header row */
+    .group-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .group-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: #111827;
+    }
+
+    .group-header p {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-top: 1px;
+    }
+
+    /* Feature cards inside a group */
+    .feature-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .feature-cards.single-col {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-cards.three-col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .fcard {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .fcard-visual {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fcard-body {
+      padding: 16px 18px 18px;
+    }
+
+    .fcard-tags {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .fcard-body h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .fcard-body p {
+      font-size: 0.85rem;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* Wide card (spans 2 columns) */
+    .fcard.wide {
+      grid-column: span 2;
+    }
+
+    .fcard.wide .fcard-visual {
+      height: 160px;
+    }
+
+    /* ── Visuals ── */
+
+    /* Mask */
+    .vis-mask {
+      background: linear-gradient(160deg, #f1f5f9, #e2e8f0);
+    }
+
+    .mask-img {
+      width: 130px;
+      height: 85px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+      position: relative;
+    }
+
+    .mask-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 7px;
+      background: rgba(37, 99, 235, 0.2);
+      border: 2px dashed rgba(37, 99, 235, 0.55);
+    }
+
+    .mh {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      background: #2563eb;
+      border: 1.5px solid #fff;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .mh.tl {
+      top: -4px;
+      left: -4px;
+    }
+
+    .mh.tr {
+      top: -4px;
+      right: -4px;
+    }
+
+    .mh.bl {
+      bottom: -4px;
+      left: -4px;
+    }
+
+    .mh.br {
+      bottom: -4px;
+      right: -4px;
+    }
+
+    /* Stage */
+    .vis-stage {
+      background: linear-gradient(160deg, #f0fdf4, #dcfce7);
+    }
+
+    .stage-g {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .stage-c {
+      width: 70px;
+      height: 44px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(22, 163, 74, 0.35);
+      background: rgba(255, 255, 255, 0.7);
+      position: relative;
+    }
+
+    .stage-c::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #16a34a;
+    }
+
+    /* Key/fill */
+    .vis-keyfill {
+      background: linear-gradient(160deg, #fff7ed, #ffedd5);
+      overflow: hidden;
+    }
+
+    .kfl {
+      width: 80px;
+      height: 80px;
+      border-radius: 7px;
+      border: 1.5px solid rgba(234, 88, 12, 0.2);
+      position: absolute;
+    }
+
+    .kfl:nth-child(1) {
+      background: rgba(234, 88, 12, 0.07);
+      transform: rotate(-6deg) translateX(-24px);
+    }
+
+    .kfl:nth-child(2) {
+      background: rgba(234, 88, 12, 0.13);
+    }
+
+    .kfl:nth-child(3) {
+      background: rgba(234, 88, 12, 0.19);
+      transform: rotate(6deg) translateX(24px);
+    }
+
+    /* WATCHPAX */
+    .vis-watchpax {
+      background: linear-gradient(160deg, #fefce8, #fef9c3);
+      gap: 18px;
+    }
+
+    .wp-box {
+      background: #1e293b;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .wp-box.device {
+      width: 70px;
+      height: 44px;
+    }
+
+    .wp-box.producer {
+      width: 70px;
+      height: 44px;
+      background: #0f172a;
+      border: 1px solid #334155;
+    }
+
+    .wp-box.device::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 5px #22c55e;
+    }
+
+    .wp-screen {
+      width: 52px;
+      height: 30px;
+      background: #1e3a5f;
+      border-radius: 3px;
+    }
+
+    .wp-conn {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .wp-conn-line {
+      width: 26px;
+      height: 2px;
+      background: #ca8a04;
+      border-radius: 1px;
+      opacity: 0.8;
+    }
+
+    /* WoL */
+    .vis-wol {
+      background: linear-gradient(160deg, #ecfdf5, #d1fae5);
+      gap: 16px;
+    }
+
+    .wol-n {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .wol-c {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(5, 150, 105, 0.4);
+      background: rgba(5, 150, 105, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wol-d {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .wol-d.off {
+      background: #d1d5db;
+    }
+
+    .wol-d.on {
+      background: #059669;
+      box-shadow: 0 0 5px #059669;
+    }
+
+    .wol-t {
+      font-size: 0.58rem;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .wol-arr {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .wol-l {
+      width: 28px;
+      height: 1.5px;
+      background: rgba(5, 150, 105, 0.5);
+      border-radius: 1px;
+    }
+
+    /* GPU */
+    .vis-gpu {
+      background: linear-gradient(160deg, #f0f9ff, #e0f2fe);
+    }
+
+    .gpu-chip {
+      width: 80px;
+      height: 80px;
+      background: #0f172a;
+      border-radius: 9px;
+      border: 1.5px solid #334155;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 3px;
+      padding: 9px;
+    }
+
+    .gpu-c {
+      background: #1e40af;
+      border-radius: 2px;
+      opacity: 0.65;
+    }
+
+    .gpu-c.a {
+      opacity: 1;
+      background: #3b82f6;
+      box-shadow: 0 0 3px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Speed */
+    .vis-speed {
+      background: linear-gradient(160deg, #fdf4ff, #f3e8ff);
+      gap: 8px;
+      padding: 0 24px;
+    }
+
+    .spd-track {
+      flex: 1;
+      height: 5px;
+      background: #e9d5ff;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .spd-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: #9333ea;
+      border-radius: 3px;
+    }
+
+    .spd-thumb {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background: #9333ea;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .spd-lbl {
+      background: #9333ea;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* Offline docs */
+    .vis-docs {
+      background: linear-gradient(160deg, #fdf2f8, #fce7f3);
+      gap: 10px;
+    }
+
+    .doc-p {
+      width: 60px;
+      height: 78px;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid rgba(190, 24, 93, 0.18);
+      padding: 7px 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .doc-l {
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(190, 24, 93, 0.12);
+    }
+
+    .doc-l.a {
+      background: rgba(190, 24, 93, 0.4);
+      width: 60%;
+    }
+
+    .doc-offline {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: #be185d;
+      color: #fff;
+      font-size: 0.58rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    /* Log */
+    .vis-log {
+      background: linear-gradient(160deg, #0f172a, #1e293b);
+      padding: 14px 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .log-row {
+      display: flex;
+      gap: 8px;
+      font-family: "Menlo", "Monaco", "Consolas", monospace;
+      font-size: 0.62rem;
+    }
+
+    .lg-t {
+      color: #475569;
+      flex-shrink: 0;
+    }
+
+    .lg-l {
+      font-weight: 700;
+      flex-shrink: 0;
+      width: 32px;
+    }
+
+    .lg-l.i {
+      color: #38bdf8;
+    }
+
+    .lg-l.w {
+      color: #fbbf24;
+    }
+
+    .lg-l.e {
+      color: #f87171;
+    }
+
+    .lg-m {
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* cmake */
+    .vis-cmake {
+      background: linear-gradient(160deg, #0f172a, #1a2332);
+      padding: 14px 18px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .cmake-line {
+      font-family: "Menlo", "Monaco", "Consolas", monospace;
+      font-size: 0.62rem;
+    }
+
+    .cm-key {
+      color: #7dd3fc;
+    }
+
+    .cm-eq {
+      color: #94a3b8;
+    }
+
+    .cm-val {
+      color: #86efac;
+    }
+
+    .cm-cmt {
+      color: #475569;
+    }
+
+    /* IP reconnect */
+    .vis-net {
+      background: linear-gradient(160deg, #ecfdf5, #d1fae5);
+    }
+
+    /* WP-Config */
+    .vis-wpconfig {
+      background: linear-gradient(160deg, #f8fafc, #f1f5f9);
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    .sync-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sync-label {
+      font-size: 0.7rem;
+      color: #374151;
+      font-weight: 500;
+      width: 80px;
+    }
+
+    .sync-bar {
+      flex: 1;
+      height: 5px;
+      background: #e2e8f0;
+      border-radius: 3px;
+    }
+
+    .sync-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .sync-tick {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #10b981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      color: #fff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-header">
+    <p class="release-eyebrow">April 1, 2026</p>
+    <h1>What's New</h1>
+    <p class="subtitle">New Optimizer engine, display compositing improvements,
+      hardware integration, and a set of stability and developer-tooling updates.</p>
+  </div>
+  <hr class="divider" />
+
+  <div class="page-body">
+
+    <!-- ════════════════════════════════════
+       HERO — The New Optimizer
+  ════════════════════════════════════ -->
+    <div class="hero-section">
+      <div class="hero-visual">
+        <span class="hero-label">Optimizer</span>
+        <div class="opt-ui">
+          <div class="opt-bar"></div>
+          <div class="opt-bar"></div>
+          <div class="opt-bar"></div>
+          <div class="opt-bar"></div>
+          <div class="opt-bar"></div>
+          <div class="opt-bar"></div>
+        </div>
+      </div>
+      <div class="hero-tags">
+        <span class="tag tag-new">✦ New</span>
+        <span class="tag tag-performance">Performance</span>
+        <span class="tag tag-audio">Audio</span>
+      </div>
+      <h2>The New Optimizer</h2>
+      <p>A ground-up redesign of the Optimizer engine — faster, more flexible, and built for complex
+        production pipelines. Whether you're preparing content for the first time or revisiting it with
+        new delivery requirements, the new Optimizer gives you more control at every step.</p>
+      <p>The new <strong>"Create Version"</strong> workflow lets you re-optimize existing assets with
+        a different output codec, generating delivery variants without touching the original.
+        Color interpretation has been corrected across all pipelines, ensuring output faithfully
+        matches source material from ingest to render.</p>
+      <div class="opt-sub-grid">
+        <div class="opt-sub-card">
+          <h4>Up to 65,535 audio channels</h4>
+          <p>WAV-based audio optimization now supports the full extended channel range, covering even the most demanding
+            immersive audio setups.</p>
+        </div>
+        <div class="opt-sub-card">
+          <h4>Create Version with new codec</h4>
+          <p>Re-optimize any asset with a fresh output codec — no need to re-ingest the original source file.</p>
+        </div>
+        <div class="opt-sub-card">
+          <h4>Corrected color interpretation</h4>
+          <p>Color values are accurately preserved through the optimization pipeline, eliminating subtle shifts seen in
+            previous versions.</p>
+        </div>
+        <div class="opt-sub-card">
+          <h4>Upgraded dependency stack</h4>
+          <p>Replaced russimp with russimp-ng for improved 3D asset handling and broader format compatibility.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+       Display & Compositing
+  ════════════════════════════════════ -->
+    <div class="group-section">
+      <div class="group-header">
+        <div>
+          <h2>Display &amp; Compositing</h2>
+          <p>Precision layout, masking, and multi-channel signal routing</p>
+        </div>
+      </div>
+      <div class="feature-cards">
+
+        <div class="fcard">
+          <div class="fcard-visual vis-mask">
+            <div class="mask-img">
+              <div class="mask-overlay">
+                <div class="mh tl"></div>
+                <div class="mh tr"></div>
+                <div class="mh bl"></div>
+                <div class="mh br"></div>
+              </div>
+            </div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-display">Display</span>
+            </div>
+            <h3>Display Image Mask Editing</h3>
+            <p>Edit image masks on displays directly, with precise control over composited areas. Refine boundaries
+              without leaving your current workflow.</p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-stage">
+            <div class="stage-g">
+              <div class="stage-c"></div>
+              <div class="stage-c"></div>
+              <div class="stage-c"></div>
+              <div class="stage-c"></div>
+            </div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-display">Display</span>
+            </div>
+            <h3>Pixel-Perfect Stage Positioning</h3>
+            <p>Place cues and 2D displays on the stage with sub-pixel precision. Eliminate rounding errors in complex
+              multi-display layouts.</p>
+          </div>
+        </div>
+
+        <div class="fcard wide">
+          <div class="fcard-visual vis-keyfill">
+            <div class="kfl"></div>
+            <div class="kfl"></div>
+            <div class="kfl"></div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-display">Display</span>
+            </div>
+            <h3>Multi-Channel Key and Fill</h3>
+            <p>Route key and fill signals across multiple channels simultaneously, streamlining high-channel-count
+              compositing setups and reducing manual configuration overhead in complex productions.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+       Hardware & Connectivity
+  ════════════════════════════════════ -->
+    <div class="group-section">
+      <div class="group-header">
+        <div>
+          <h2>Hardware &amp; Connectivity</h2>
+          <p>WATCHPAX integration, remote power management, and network resilience</p>
+        </div>
+      </div>
+      <div class="feature-cards three-col">
+
+        <div class="fcard">
+          <div class="fcard-visual vis-watchpax" style="display:flex;">
+            <div class="wp-box device"></div>
+            <div class="wp-conn">
+              <div class="wp-conn-line"></div>
+              <div class="wp-conn-line"></div>
+            </div>
+            <div class="wp-box producer">
+              <div class="wp-screen"></div>
+            </div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-hardware">Hardware</span>
+            </div>
+            <h3>WATCHPAX in Producer</h3>
+            <p>Monitor and control WATCHPAX devices directly from the producer interface — no separate tool required.
+            </p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-wol" style="display:flex;">
+            <div class="wol-n">
+              <div class="wol-c">
+                <div class="wol-d off"></div>
+              </div>
+              <div class="wol-t">Sleeping</div>
+            </div>
+            <div class="wol-arr">
+              <div class="wol-l"></div>
+              <div class="wol-l"></div>
+              <div class="wol-l"></div>
+            </div>
+            <div class="wol-n">
+              <div class="wol-c">
+                <div class="wol-d on"></div>
+              </div>
+              <div class="wol-t">Awake</div>
+            </div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-network">Network</span>
+            </div>
+            <h3>Wake on LAN</h3>
+            <p>Power on remote display nodes over the network without physical access — ideal for distributed
+              installations.</p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-net">
+            <svg width="220" height="110" viewBox="0 0 220 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- edges -->
+              <line x1="36" y1="28" x2="90" y2="55" stroke="rgba(5,150,105,0.3)" stroke-width="1.5" />
+              <line x1="36" y1="28" x2="42" y2="80" stroke="rgba(5,150,105,0.3)" stroke-width="1.5" />
+              <line x1="90" y1="55" x2="42" y2="80" stroke="rgba(5,150,105,0.3)" stroke-width="1.5" />
+              <line x1="90" y1="55" x2="162" y2="32" stroke="rgba(5,150,105,0.3)" stroke-width="1.5" />
+              <line x1="90" y1="55" x2="178" y2="80" stroke="rgba(5,150,105,0.3)" stroke-width="1.5" />
+              <line x1="162" y1="32" x2="178" y2="80" stroke="rgba(5,150,105,0.3)" stroke-width="1.5" />
+              <!-- nodes -->
+              <circle cx="36" cy="28" r="12" fill="rgba(5,150,105,0.1)" stroke="rgba(5,150,105,0.4)"
+                stroke-width="1.5" />
+              <circle cx="36" cy="28" r="4" fill="#059669" />
+              <circle cx="90" cy="55" r="12" fill="rgba(5,150,105,0.15)" stroke="rgba(5,150,105,0.5)"
+                stroke-width="1.5" />
+              <circle cx="90" cy="55" r="4" fill="#059669" />
+              <circle cx="42" cy="80" r="12" fill="rgba(5,150,105,0.1)" stroke="rgba(5,150,105,0.4)"
+                stroke-width="1.5" />
+              <circle cx="42" cy="80" r="4" fill="#059669" />
+              <circle cx="162" cy="32" r="12" fill="rgba(5,150,105,0.1)" stroke="rgba(5,150,105,0.4)"
+                stroke-width="1.5" />
+              <circle cx="162" cy="32" r="4" fill="#059669" />
+              <circle cx="178" cy="80" r="12" fill="rgba(5,150,105,0.1)" stroke="rgba(5,150,105,0.4)"
+                stroke-width="1.5" />
+              <circle cx="178" cy="80" r="4" fill="#059669" />
+            </svg>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-improved">↑ Improved</span><span
+                class="tag tag-network">Network</span></div>
+            <h3>IP Change &amp; Reconnection</h3>
+            <p>IP address changes are now detected and handled gracefully, with automatic reconnection to reduce manual
+              intervention during live operations.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+       Producer
+  ════════════════════════════════════ -->
+    <div class="group-section">
+      <div class="group-header">
+        <div>
+          <h2>Producer</h2>
+          <p>GPU control, playback speed, and persistent configuration</p>
+        </div>
+      </div>
+      <div class="feature-cards">
+
+        <div class="fcard">
+          <div class="fcard-visual vis-gpu" style="display:flex;">
+            <div class="gpu-chip">
+              <div class="gpu-c a"></div>
+              <div class="gpu-c"></div>
+              <div class="gpu-c a"></div>
+              <div class="gpu-c"></div>
+              <div class="gpu-c a"></div>
+              <div class="gpu-c"></div>
+              <div class="gpu-c a"></div>
+              <div class="gpu-c"></div>
+              <div class="gpu-c a"></div>
+            </div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span
+                class="tag tag-performance">Performance</span></div>
+            <h3>GPU Preferences &amp; Override</h3>
+            <p>Specify which graphics adapter the producer should use and override defaults per setup — useful for
+              machines with multiple or mixed GPUs.</p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-speed" style="display:flex;">
+            <span class="spd-lbl">0.5×</span>
+            <div class="spd-track">
+              <div class="spd-fill" style="width:40%"></div>
+              <div class="spd-thumb" style="left:40%"></div>
+            </div>
+            <span class="spd-lbl">2×</span>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-audio">Audio</span></div>
+            <h3>Adjustable Video &amp; Audio Speed</h3>
+            <p>Slow down or speed up video and audio independently. Creative timing adjustments without needing to
+              re-encode assets.</p>
+          </div>
+        </div>
+
+        <div class="fcard wide">
+          <div class="fcard-visual vis-wpconfig" style="display:flex;padding:20px 24px;">
+            <div class="sync-row">
+              <span class="sync-label" style="font-size:0.68rem;color:#6b7280;">Sync interval</span>
+              <div class="sync-bar">
+                <div class="sync-fill" style="width:65%;background:#6366f1;"></div>
+              </div>
+              <div class="sync-tick">✓</div>
+            </div>
+            <div class="sync-row">
+              <span class="sync-label" style="font-size:0.68rem;color:#6b7280;">Auto-reconnect</span>
+              <div class="sync-bar">
+                <div class="sync-fill" style="width:100%;background:#10b981;"></div>
+              </div>
+              <div class="sync-tick">✓</div>
+            </div>
+            <div class="sync-row">
+              <span class="sync-label" style="font-size:0.68rem;color:#6b7280;">State persist</span>
+              <div class="sync-bar">
+                <div class="sync-fill" style="width:100%;background:#10b981;"></div>
+              </div>
+              <div class="sync-tick">✓</div>
+            </div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-improved">↑ Improved</span></div>
+            <h3>Persistent Sync Settings in WP-Config</h3>
+            <p>Sync settings in WP-Config are now correctly persisted between sessions, eliminating the need to re-apply
+              configuration after every restart.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+       Documentation & Developer Tools
+  ════════════════════════════════════ -->
+    <div class="group-section">
+      <div class="group-header">
+        <div>
+          <h2>Documentation &amp; Developer Tools</h2>
+          <p>Offline docs, unified references, build options, and log tooling</p>
+        </div>
+      </div>
+      <div class="feature-cards">
+
+        <div class="fcard">
+          <div class="fcard-visual vis-docs" style="display:flex;">
+            <div class="doc-p">
+              <div class="doc-l a"></div>
+              <div class="doc-l"></div>
+              <div class="doc-l"></div>
+              <div class="doc-l" style="width:80%"></div>
+              <div class="doc-l a" style="margin-top:3px"></div>
+              <div class="doc-l"></div>
+              <div class="doc-l" style="width:70%"></div>
+            </div>
+            <div class="doc-p" style="transform:translateX(-5px) translateY(5px) rotate(3deg);opacity:0.4;">
+              <div class="doc-l"></div>
+              <div class="doc-l" style="width:80%"></div>
+              <div class="doc-l"></div>
+            </div>
+            <div class="doc-offline">Offline</div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span class="tag tag-docs">Docs</span></div>
+            <h3>Embedded Offline Documentation</h3>
+            <p>Full documentation is now bundled in the app and accessible without an internet connection — essential
+              for on-site work.</p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-docs" style="display:flex;background:linear-gradient(160deg,#f0f9ff,#e0f2fe);">
+            <div class="doc-p" style="border-color:rgba(2,132,199,0.18);">
+              <div class="doc-l" style="background:rgba(2,132,199,0.4);width:60%"></div>
+              <div class="doc-l" style="background:rgba(2,132,199,0.12)"></div>
+              <div class="doc-l" style="background:rgba(2,132,199,0.12)"></div>
+              <div class="doc-l" style="background:rgba(2,132,199,0.4);width:60%;margin-top:3px"></div>
+              <div class="doc-l" style="background:rgba(2,132,199,0.12)"></div>
+            </div>
+            <div class="doc-p"
+              style="transform:translateX(5px) translateY(5px) rotate(-3deg);opacity:0.4;border-color:rgba(2,132,199,0.18);">
+              <div class="doc-l" style="background:rgba(2,132,199,0.12)"></div>
+              <div class="doc-l" style="background:rgba(2,132,199,0.12);width:80%"></div>
+            </div>
+            <div class="doc-offline" style="background:#0284c7;">Unified</div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-improved">↑ Improved</span><span
+                class="tag tag-docs">Docs</span></div>
+            <h3>Unified WATCHOUT &amp; WATCHPAX Docs</h3>
+            <p>WATCHOUT and WATCHPAX documentation has been merged into a single reference — no more switching between
+              separate guides.</p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-cmake" style="display:flex;">
+            <div class="cmake-line"><span class="cm-key">set</span><span class="cm-eq">(</span><span
+                class="cm-val">AUTO_START_VISUALRENDERER</span></div>
+            <div class="cmake-line" style="padding-left:16px;"><span class="cm-val">ON</span> <span class="cm-cmt"># or
+                OFF</span><span class="cm-eq">)</span></div>
+            <div class="cmake-line" style="margin-top:6px;"><span class="cm-cmt"># Controls whether the visual</span>
+            </div>
+            <div class="cmake-line"><span class="cm-cmt"># renderer starts automatically</span></div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-new">✦ New</span><span
+                class="tag tag-developer">Developer</span></div>
+            <h3>Visual Renderer Auto-Start Option</h3>
+            <p>A new cmake build option controls whether the visual renderer starts automatically, giving developers
+              finer control over build targets and deployment environments.</p>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="fcard-visual vis-log" style="display:flex;">
+            <div class="log-row"><span class="lg-t">13:04:01</span><span class="lg-l i">INFO</span><span
+                class="lg-m">Session started, awaiting input</span></div>
+            <div class="log-row"><span class="lg-t">13:04:08</span><span class="lg-l i">INFO</span><span
+                class="lg-m">User interaction detected</span></div>
+            <div class="log-row"><span class="lg-t">13:04:08</span><span class="lg-l w">WARN</span><span
+                class="lg-m">Analyzing log context...</span></div>
+            <div class="log-row"><span class="lg-t">13:04:09</span><span class="lg-l i">INFO</span><span
+                class="lg-m">Analysis complete ✓</span></div>
+          </div>
+          <div class="fcard-body">
+            <div class="fcard-tags"><span class="tag tag-improved">↑ Improved</span><span
+                class="tag tag-developer">Developer</span></div>
+            <h3>Log Analyzer After User Input</h3>
+            <p>The log analyzer now activates in response to user input, surfacing contextual insights at the right
+              moment rather than running continuously.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /.page-body -->
+</body>
+
+</html>
